@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wheelsmart - IT Department - Service Request Portal</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { margin: 0; padding: 16px; background: #f1f5f9; color: #1e293b; }
+    .container { max-width: 720px; margin: 0 auto; }
+
+    .header {
+      background: #0f172a; color: #fff; padding: 15px 18px; border-radius: 12px;
+      display: flex; align-items: center; gap: 13px; margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .logo-box {
+      width: 46px; height: 46px; background: #ffffff; border-radius: 9px;
+      padding: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .logo-box img {
+      max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;
+    }
+    .header h1 { margin: 0; font-size: 19px; line-height: 1.2; }
+    .header span { font-size: 12.5px; color: #38bdf8; font-weight: 600; display: block; margin-top: 2px; }
+
+    .card {
+      background: #fff; border-radius: 12px; padding: 18px 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06); margin-bottom: 16px;
+    }
+    .card h2 {
+      margin: 0 0 14px; font-size: 16.5px; color: #0f172a;
+      border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;
+    }
+    .card h3 {
+      margin: 0 0 10px; font-size: 15px; color: #0f172a;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    .field { margin-bottom: 12px; }
+    label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: #334155; }
+    input, select, textarea {
+      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1;
+      border-radius: 8px; font-size: 13.5px; background: #fff; color: #0f172a;
+    }
+    input[readonly] { background: #e2e8f0; color: #334155; font-weight: 600; cursor: not-allowed; }
+    textarea { min-height: 88px; resize: vertical; }
+
+    .combo-wrap { position: relative; }
+    .combo-list {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
+      background: #fff; border: 1px solid #93c5fd; border-top: none;
+      border-radius: 0 0 8px 8px; max-height: 200px; overflow-y: auto;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14); display: none;
+    }
+    .combo-list.open { display: block; }
+    .combo-item {
+      padding: 8px 12px; font-size: 13.5px; cursor: pointer; color: #0f172a;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .combo-item:last-child { border-bottom: none; }
+    .combo-item:hover, .combo-item.active { background: #eff6ff; color: #1d4ed8; font-weight: 600; }
+    .combo-empty { padding: 8px 12px; font-size: 12.5px; color: #64748b; }
+
+    .file-box {
+      border: 1px dashed #94a3b8; background: #f8fafc; padding: 10px 12px; border-radius: 8px;
+    }
+    .file-box input { border: none; background: transparent; padding: 0; }
+    .file-note { font-size: 11.5px; color: #64748b; margin-top: 4px; }
+
+    .btn-submit {
+      width: 100%; background: #2563eb; color: #fff; border: none; padding: 12px;
+      border-radius: 9px; font-size: 14.5px; font-weight: 700; cursor: pointer; margin-top: 4px;
+    }
+    .btn-submit:hover { background: #1d4ed8; }
+    .btn-submit:disabled { background: #94a3b8; cursor: not-allowed; }
+
+    .status-row { display: flex; gap: 8px; }
+    .btn-check {
+      background: #0284c7; color: #fff; border: none; padding: 0 18px;
+      border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;
+    }
+    .btn-check:hover { background: #0369a1; }
+    .btn-check:disabled { background: #94a3b8; cursor: not-allowed; }
+
+    .status-result {
+      margin-top: 10px; font-size: 13px; color: #1e293b;
+    }
+    .status-err {
+      padding: 10px 12px; border-radius: 8px; background: #fee2e2;
+      color: #991b1b; border: 1px solid #fca5a5;
+    }
+    .status-loading {
+      padding: 10px 12px; border-radius: 8px; background: #f1f5f9;
+      color: #334155; border: 1px solid #cbd5e1;
+    }
+
+    .msg { padding: 12px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 13.5px; display: none; }
+    .msg.ok { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    .msg.err { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="logo-box">
+      <img src="https://appv2.wheelsmart.in/static/media/wheelsmart_logo_color-2.da36b7bf923afeb003a101a033c123e7.svg" alt="Wheelsmart Logo" />
+    </div>
+    <div>
+      <h1>Wheelsmart</h1>
+      <span>IT Department — Service Request Portal</span>
+    </div>
+  </div>
+
+  <!-- Search Ticket Status by Mobile Number -->
+  <div class="card" id="phoneStatusBox">
+    <h3>📱 Check Status by Mobile Number</h3>
+    <div class="status-row">
+      <input
+        type="tel"
+        id="searchPhoneInput"
+        maxlength="15"
+        placeholder="Enter 10-digit mobile number (e.g. 9876543210)"
+        onkeydown="if(event.key==='Enter'){ event.preventDefault(); searchByMobileNumber(); }"
+      />
+      <button type="button" class="btn-check" id="btnSearchPhone" onclick="searchByMobileNumber()">Check</button>
+    </div>
+    <div id="phoneSearchResult" class="status-result" style="display:none;"></div>
+  </div>
+
+  <div id="formBanner" class="msg"></div>
+
+  <!-- Raise New IT Request -->
+  <div class="card">
+    <h2>Raise New IT Request</h2>
+    <form id="ticketForm" onsubmit="submitTicket(event)">
+      <div class="hp-field">
+        <label for="website">Website</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="reqDate">Date (Auto)</label>
+          <input type="text" id="reqDate" name="reqDate" readonly />
+        </div>
+        <div class="field">
+          <label for="empName">Employee Name *</label>
+          <input
+            type="text"
+            id="empName"
+            name="empName"
+            placeholder="Your full name"
+            oninput="formatCapInput(this)"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="whatsapp">WhatsApp Number *</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="10-digit mobile number" maxlength="15" required />
+        </div>
+        <div class="field">
+          <label for="counterSearch">Counter *</label>
+          <div class="combo-wrap" id="counterComboWrap">
+            <input
+              type="text"
+              id="counterSearch"
+              name="counterSearch"
+              placeholder="Type counter & press Enter..."
+              autocomplete="off"
+              onfocus="openCounterDropdown()"
+              oninput="filterCounters()"
+              onkeydown="handleCounterKeydown(event)"
+              required
+            />
+            <input type="hidden" id="counter" name="counter" />
+            <div class="combo-list" id="counterDropdown"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="groupSelect">IT Support Group *</label>
+          <select id="groupSelect" name="groupSelect" onchange="onGroupChange()" required>
+            <option value="">-- Select Group --</option>
+            <option value="Networking">Networking</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="categorySelect">Category *</label>
+          <select id="categorySelect" name="categorySelect" required>
+            <option value="">-- Select Group First --</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="urgency">Urgency</label>
+        <select id="urgency" name="urgency">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="issue">Problem Description *</label>
+        <textarea
+          id="issue"
+          name="issue"
+          placeholder="Describe your issue clearly..."
+          oninput="formatCapInput(this)"
+          required
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="photo">Attach Photo / Screenshot (Optional)</label>
+        <div class="file-box">
+          <input type="file" id="photo" accept="image/*" />
+          <div class="file-note">Max ~2MB recommended. Auto-compressed for fast upload.</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">Submit Service Request</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz1sIz2cipR99VMTRMBYRDC0sf0DC2e0TudJb4CBtfJ4mAKO5W6F-pAOssDyFeNq-oP7w/exec";
+
+  let COUNTERS_LIST = [];
+  let FILTERED_COUNTERS = [];
+  let ACTIVE_COUNTER_IDX = -1;
+
+  let CATEGORIES_MAP = {
+    Networking: ["Internet / LAN", "Wi-Fi / Router", "Printer / Scanner Network"],
+    Hardware: ["Desktop / Monitor", "Barcode Scanner / POS", "Power / UPS / Cables"],
+    Software: ["Wheelsmart App", "Billing / ERP", "OS / Browser / Login"]
+  };
+
+  function toTitleCaseLive(str) {
+    return String(str || "").replace(/(^|\s+)([a-zA-Z])/g, function(match, space, ch) {
+      return space + ch.toUpperCase();
+    });
+  }
+
+  function toTitleCaseFinal(str) {
+    return String(str || "")
+      .trim()
+      .replace(/\s+/g, " ")
+      .replace(/\S+/g, function(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      });
+  }
+
+  function formatCapInput(el) {
+    if (!el) return;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const formatted = toTitleCaseLive(el.value);
+    if (formatted !== el.value) {
+      el.value = formatted;
+      try { el.setSelectionRange(start, end); } catch (e) {}
+    }
+  }
+
+  function formatTodayDateOnly() {
+    return new Date().toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  document.getElementById("reqDate").value = formatTodayDateOnly();
+
+  function esc(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function showFormBanner(text, isErr) {
+    const el = document.getElementById("formBanner");
+    el.className = "msg " + (isErr ? "err" : "ok");
+    el.innerHTML = text;
+    el.style.display = "block";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function renderCounterDropdown(items) {
+    const listEl = document.getElementById("counterDropdown");
+    FILTERED_COUNTERS = items;
+    ACTIVE_COUNTER_IDX = items.length > 0 ? 0 : -1;
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML = '<div class="combo-empty">No matching counter found</div>';
+      listEl.classList.add("open");
+      return;
+    }
+
+    listEl.innerHTML = items.map((c, idx) =>
+      `<div class="combo-item ${idx === ACTIVE_COUNTER_IDX ? "active" : ""}" data-val="${esc(c)}" onmousedown="selectCounterValue(this.getAttribute('data-val'))">${esc(c)}</div>`
+    ).join("");
+    listEl.classList.add("open");
+  }
+
+  function openCounterDropdown() {
+    const q = String(document.getElementById("counterSearch").value || "").trim().toLowerCase();
+    const matches = q
+      ? COUNTERS_LIST.filter(c => String(c).toLowerCase().includes(q))
+      : COUNTERS_LIST.slice();
+    renderCounterDropdown(matches);
+  }
+
+  function filterCounters() {
+    document.getElementById("counter").value = "";
+    openCounterDropdown();
+  }
+
+  function selectCounterValue(val) {
+    const cleanVal = String(val || "").trim();
+    document.getElementById("counterSearch").value = cleanVal;
+    document.getElementById("counter").value = cleanVal;
+    document.getElementById("counterDropdown").classList.remove("open");
+  }
+
+  function handleCounterKeydown(e) {
+    const listEl = document.getElementById("counterDropdown");
+    const isOpen = listEl.classList.contains("open");
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (!isOpen) {
+        openCounterDropdown();
+        return;
+      }
+      if (FILTERED_COUNTERS.length > 0) {
+        ACTIVE_COUNTER_IDX = (ACTIVE_COUNTER_IDX + 1) % FILTERED_COUNTERS.length;
+        highlightCounterOption();
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (isOpen && FILTERED_COUNTERS.length > 0) {
+        ACTIVE_COUNTER_IDX = (ACTIVE_COUNTER_IDX - 1 + FILTERED_COUNTERS.length) % FILTERED_COUNTERS.length;
+        highlightCounterOption();
+      }
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (isOpen && ACTIVE_COUNTER_IDX >= 0 && FILTERED_COUNTERS[ACTIVE_COUNTER_IDX]) {
+        selectCounterValue(FILTERED_COUNTERS[ACTIVE_COUNTER_IDX]);
+      } else {
+        const typed = String(document.getElementById("counterSearch").value || "").trim();
+        if (typed) {
+          const exact = COUNTERS_LIST.find(c => String(c).toLowerCase() === typed.toLowerCase());
+          selectCounterValue(exact || typed);
+        }
+      }
+    } else if (e.key === "Escape") {
+      listEl.classList.remove("open");
+    }
+  }
+
+  function highlightCounterOption() {
+    const items = document.querySelectorAll("#counterDropdown .combo-item");
+    items.forEach((el, idx) => {
+      el.classList.toggle("active", idx === ACTIVE_COUNTER_IDX);
+      if (idx === ACTIVE_COUNTER_IDX) {
+        el.scrollIntoView({ block: "nearest" });
+      }
+    });
+  }
+
+  document.addEventListener("click", function(e) {
+    const wrap = document.getElementById("counterComboWrap");
+    if (wrap && !wrap.contains(e.target)) {
+      document.getElementById("counterDropdown").classList.remove("open");
+    }
+  });
+
+  function loadCounters() {
+    if (!SCRIPT_URL || SCRIPT_URL.indexOf("http") !== 0) return;
+    fetch(SCRIPT_URL + "?action=getCounters&_t=" + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.status === "success" && Array.isArray(data.counters)) {
+          COUNTERS_LIST = data.counters;
+        }
+      })
+      .catch(() => {});
+  }
+
+  function onGroupChange() {
+    const grp = document.getElementById("groupSelect").value;
+    const catSel = document.getElementById("categorySelect");
+    catSel.innerHTML = "";
+
+    if (!grp || !CATEGORIES_MAP[grp]) {
+      catSel.innerHTML = '<option value="">-- Select Group First --</option>';
+      return;
+    }
+
+    catSel.innerHTML = '<option value="">-- Select Category --</option>' +
+      CATEGORIES_MAP[grp].map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  }
+
+  function loadCategories() {
+    if (!SCRIPT_URL || SCRIPT_URL.indexOf("http") !== 0) return;
+    fetch(SCRIPT_URL + "?action=getCategories&_t=" + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.status === "success" && data.categories) {
+          CATEGORIES_MAP = data.categories;
+          if (document.getElementById("groupSelect").value) {
+            onGroupChange();
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
+  function searchByMobileNumber() {
+    const inputEl = document.getElementById("searchPhoneInput");
+    const btnEl = document.getElementById("btnSearchPhone");
+    const resEl = document.getElementById("phoneSearchResult");
+
+    const digits = String(inputEl ? inputEl.value : "").replace(/\D/g, "");
+    const phone10 = digits.length >= 10 ? digits.slice(-10) : digits;
+
+    if (phone10.length !== 10) {
+      resEl.style.display = "block";
+      resEl.innerHTML = '<div class="status-err">Please enter a valid 10-digit mobile number.</div>';
+      if (inputEl) inputEl.focus();
+      return;
+    }
+
+    btnEl.disabled = true;
+    btnEl.textContent = "Checking...";
+    resEl.style.display = "block";
+    resEl.innerHTML = `<div class="status-loading">Searching tickets for ${esc(phone10)}...</div>`;
+
+    fetch(SCRIPT_URL + "?action=searchByPhone&phone=" + encodeURIComponent(phone10) + "&_t=" + Date.now())
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.status === "success" && Array.isArray(data.tickets) && data.tickets.length > 0) {
+          resEl.innerHTML = data.tickets.map(t => {
+            const st = esc(t.ticketStatus || "Pending");
+            const isDone = st.toLowerCase() === "completed";
+            return `
+              <div style="padding:10px 12px;border:1px solid #cbd5e1;border-radius:8px;margin-top:8px;background:#f8fafc;">
+                <div><strong>Ticket ID:</strong> ${esc(t.ticketId)} &nbsp;|&nbsp; <strong>Status:</strong> <span style="font-weight:700;color:${isDone ? '#15803d' : '#1d4ed8'};">${st}</span></div>
+                <div style="margin-top:4px;font-size:13px;"><strong>Counter:</strong> ${esc(t.counter)} &nbsp;|&nbsp; <strong>Group:</strong> ${esc(t.group)} (${esc(t.category)})</div>
+                ${t.date ? `<div style="margin-top:2px;font-size:12.5px;color:#475569;"><strong>Date:</strong> ${esc(t.date)}</div>` : ""}
+              </div>
+            `;
+          }).join("");
+        } else {
+          resEl.innerHTML = `<div class="status-err">${esc((data && data.message) || "No tickets found.")}</div>`;
+        }
+      })
+      .catch(() => {
+        resEl.innerHTML = '<div class="status-err">Network error while searching tickets.</div>';
+      })
+      .finally(() => {
+        btnEl.disabled = false;
+        btnEl.textContent = "Check";
+      });
+  }
+
+  function compressImageToBase64(file) {
+    return new Promise((resolve) => {
+      if (!file) return resolve({ photoBase64: "", photoMime: "" });
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const img = new Image();
+        img.onload = function() {
+          const maxDim = 1280;
+          let w = img.width;
+          let h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w >= h) {
+              h = Math.round((h * maxDim) / w);
+              w = maxDim;
+            } else {
+              w = Math.round((w * maxDim) / h);
+              h = maxDim;
+            }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, w, h);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.78);
+          const parts = dataUrl.split(",");
+          resolve({
+            photoBase64: parts[1] || "",
+            photoMime: "image/jpeg"
+          });
+        };
+        img.onerror = function() {
+          const raw = String(evt.target.result || "");
+          const parts = raw.split(",");
+          resolve({
+            photoBase64: parts[1] || "",
+            photoMime: file.type || "image/jpeg"
+          });
+        };
+        img.src = evt.target.result;
+      };
+      reader.onerror = function() {
+        resolve({ photoBase64: "", photoMime: "" });
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function submitTicket(e) {
+    e.preventDefault();
+
+    const website = document.getElementById("website").value.trim();
+    if (website) return;
+
+    const dateOnly = formatTodayDateOnly();
+    document.getElementById("reqDate").value = dateOnly;
+
+    const empInput = document.getElementById("empName");
+    const issueInput = document.getElementById("issue");
+
+    const name = toTitleCaseFinal(empInput.value);
+    const whatsapp = document.getElementById("whatsapp").value.replace(/\D/g, "");
+    const counterTyped = document.getElementById("counterSearch").value.trim();
+    const counterHidden = document.getElementById("counter").value.trim();
+    const counter = counterHidden || counterTyped;
+    const group = document.getElementById("groupSelect").value.trim();
+    const category = document.getElementById("categorySelect").value.trim();
+    const urgency = document.getElementById("urgency").value.trim() || "Medium";
+    const issue = toTitleCaseFinal(issueInput.value);
+
+    empInput.value = name;
+    issueInput.value = issue;
+
+    if (!name || !whatsapp || !counter || !group || !category || !issue) {
+      showFormBanner("Please fill all required fields marked with *.", true);
+      return;
+    }
+
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+      const fileInput = document.getElementById("photo");
+      const file = (fileInput && fileInput.files && fileInput.files[0]) ? fileInput.files[0] : null;
+      const photoData = await compressImageToBase64(file);
+
+      const payload = {
+        action: "submitRequest",
+        website: "",
+        dateOnly: dateOnly,
+        name: name,
+        whatsapp: whatsapp,
+        counter: counter,
+        group: group,
+        category: category,
+        urgency: urgency,
+        issue: issue,
+        photoBase64: photoData.photoBase64,
+        photoMime: photoData.photoMime
+      };
+
+      const resp = await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify(payload)
+      });
+      const result = await resp.json();
+
+      if (result && result.status === "success") {
+        showFormBanner(
+          `Request submitted successfully! Your Ticket ID is <strong>${esc(result.ticketId)}</strong>.`,
+          false
+        );
+        document.getElementById("ticketForm").reset();
+        document.getElementById("reqDate").value = formatTodayDateOnly();
+        document.getElementById("counter").value = "";
+        document.getElementById("categorySelect").innerHTML = '<option value="">-- Select Group First --</option>';
+      } else {
+        showFormBanner(result && result.message ? result.message : "Failed to submit request.", true);
+      }
+    } catch (err) {
+      showFormBanner("Network error while submitting request.", true);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Service Request";
+    }
+  }
+
+  loadCounters();
+  loadCategories();
+</script>
+</body>
+</html>
