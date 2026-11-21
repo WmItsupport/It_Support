@@ -8,6 +8,183 @@
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
     body { margin: 0; background: #f4f6f9; color: #2c3e50; }
 
+    /* ==================== SPLIT LOGIN SCREEN ==================== */
+    .login-screen {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      background: #f8fafc;
+    }
+    @media (max-width: 860px) {
+      .login-screen { grid-template-columns: 1fr; }
+    }
+
+    .login-hero {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 48px 52px;
+      color: #0f172a;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.92) 0%, rgba(224, 242, 254, 0.65) 36%, transparent 62%),
+        linear-gradient(125deg, #f8fafc 0%, #dbeafe 42%, #1d4ed8 82%, #0f172a 100%);
+    }
+    .login-hero::before {
+      content: "";
+      position: absolute;
+      top: -18%;
+      right: -22%;
+      width: 78%;
+      height: 135%;
+      border-radius: 48% 52% 44% 56% / 42% 38% 62% 58%;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.55) 0%, rgba(56, 189, 248, 0.28) 48%, rgba(30, 64, 175, 0.55) 100%);
+      transform: rotate(-16deg);
+      pointer-events: none;
+    }
+    .login-hero::after {
+      content: "";
+      position: absolute;
+      bottom: -24%;
+      left: -12%;
+      width: 85%;
+      height: 75%;
+      border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%;
+      background: linear-gradient(35deg, rgba(2, 132, 199, 0.22) 0%, rgba(255, 255, 255, 0.65) 70%, transparent 100%);
+      transform: rotate(12deg);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 460px; margin: 0 auto; }
+    .hero-brand-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid #bfdbfe;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+      margin-bottom: 18px;
+    }
+    .hero-brand-row img { height: 40px; width: auto; display: block; }
+    .hero-wordmark {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -1.4px;
+      line-height: 1;
+      color: #0f172a;
+      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.75);
+    }
+    .hero-wordmark span.accent { color: #1d4ed8; }
+    .hero-sub {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: #1e3a8a;
+    }
+
+    .login-panel-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 26px 26px 22px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+    .login-title {
+      margin: 0 0 18px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #1e293b;
+    }
+
+    .input-icon-wrap { position: relative; display: flex; align-items: center; }
+    .input-icon {
+      position: absolute;
+      left: 11px;
+      font-size: 14px;
+      color: #64748b;
+      pointer-events: none;
+      user-select: none;
+    }
+    .input-icon-wrap input,
+    .input-icon-wrap select { padding-left: 34px; }
+
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0 12px;
+      color: #64748b;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .login-divider::before,
+    .login-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .btn-signin {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #94a3b8;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-signin:hover { background: #1d4ed8; color: #ffffff; border-color: #1d4ed8; }
+    .btn-signin:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-mobile-login {
+      width: 100%;
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-mobile-login:hover { background: #0369a1; }
+
+    .mobile-otp-box { display: none; }
+    .mobile-otp-box.open { display: block; }
+
+    .login-footer-note {
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+      text-align: center;
+      font-size: 11.5px;
+      color: #64748b;
+    }
+
     /* ==================== SIGN-BOARD BANNER ==================== */
     .sign-banner {
       position: relative;
@@ -19,29 +196,15 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      min-height: 88px;
+      min-height: 84px;
       margin-bottom: 16px;
       box-shadow: 0 4px 14px rgba(43, 108, 176, 0.22);
       border-top: 3px solid #f8fafc;
       border-bottom: 4px solid #0284c7;
       border-left: 2px solid #ffffff;
       border-right: 2px solid #ffffff;
+      padding: 0 16px;
     }
-
-    /* Left light wave block */
-    .sign-banner::before {
-      content: "";
-      position: absolute;
-      top: -6px;
-      left: -10px;
-      width: 196px;
-      height: 106px;
-      background: #f8fafc;
-      border-bottom-right-radius: 85px 52px;
-      z-index: 1;
-    }
-
-    /* Right light wave block */
     .sign-banner::after {
       content: "";
       position: absolute;
@@ -53,44 +216,18 @@
       border-top-left-radius: 95px 54px;
       z-index: 1;
     }
-
-    /* User Request Screen: left image removed */
-    .user-banner {
-      padding-left: 16px;
-    }
-    .user-banner::before {
-      display: none;
-    }
-    .user-banner .sign-center {
-      flex: 0 1 auto;
-      text-align: left;
-      padding: 6px 8px;
-    }
-
-    .sign-center {
-      position: relative;
-      z-index: 2;
-      flex: 1;
-      text-align: center;
-      padding: 6px 8px;
-    }
-
-    .sign-wordmark-row {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
+    .user-banner::before,
+    .admin-topbar::before { display: none; }
+    .sign-center { position: relative; z-index: 2; text-align: left; padding: 6px 8px; }
+    .sign-wordmark-row { display: inline-flex; align-items: center; gap: 6px; }
     .sign-wordmark {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 900;
       letter-spacing: -0.8px;
       line-height: 1;
       color: #ffffff;
       text-shadow: 0 2px 4px rgba(15, 23, 42, 0.22);
     }
-
     .sign-sub {
       margin-top: 4px;
       font-size: 10.5px;
@@ -99,17 +236,15 @@
       text-transform: uppercase;
       color: #e0f2fe;
     }
-
     .sign-right {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 10px;
-      padding: 8px 16px;
+      margin-left: auto;
     }
-
     .logo-slot-right {
       height: 50px;
       min-width: 112px;
@@ -131,35 +266,7 @@
       display: block;
     }
 
-    .btn-staff-login {
-      background: #2b6cb0;
-      color: #ffffff;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 7px;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.14);
-      white-space: nowrap;
-    }
-    .btn-staff-login:hover { background: #1e4e8c; }
-
-    /* Admin Topbar: No left image; User ID + Logout shifted further left; Right image at far right */
-    .admin-topbar {
-      border-radius: 0;
-      margin-bottom: 0;
-      min-height: 84px;
-      padding: 0 16px;
-    }
-    .admin-topbar::before {
-      display: none;
-    }
-    .admin-topbar .sign-center {
-      flex: 0 1 auto;
-      text-align: left;
-      padding: 6px 10px;
-    }
+    .admin-topbar { border-radius: 0; margin-bottom: 0; }
     .admin-right-cluster {
       position: relative;
       z-index: 3;
@@ -203,29 +310,18 @@
     .btn-top-logout:hover { background: #e2e8f0; color: #0f172a; }
 
     @media (max-width: 720px) {
-      .sign-banner { flex-wrap: wrap; }
-      .sign-banner::before { width: 150px; height: 86px; }
-      .sign-banner::after { width: 195px; height: 86px; }
-      .sign-wordmark { font-size: 24px; }
-      .sign-right {
-        width: 100%;
-        justify-content: flex-end;
-        padding: 4px 14px 10px;
-      }
-      .admin-topbar { padding: 8px 12px; }
-      .admin-right-cluster {
+      .sign-banner { flex-wrap: wrap; padding: 8px 12px; }
+      .sign-right, .admin-right-cluster {
         width: 100%;
         justify-content: space-between;
         margin-left: 0;
         padding-top: 4px;
       }
-      .admin-user-controls {
-        margin-right: 0;
-      }
+      .admin-user-controls { margin-right: 0; }
     }
 
     /* ==================== USER PORTAL VIEW ==================== */
-    .user-wrap { max-width: 820px; margin: 16px auto; padding: 0 14px; }
+    .user-wrap { max-width: 840px; margin: 16px auto; padding: 0 14px; }
 
     .card {
       background: #fff; border-radius: 10px; padding: 18px 20px;
@@ -243,10 +339,10 @@
     .field { margin-bottom: 12px; }
     label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: #334155; }
     input, select, textarea {
-      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1;
-      border-radius: 7px; font-size: 13.5px; background: #fff; color: #1e293b;
+      width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1;
+      border-radius: 6px; font-size: 13.5px; background: #fff; color: #1e293b;
     }
-    input:focus, select:focus, textarea:focus { outline: none; border-color: #2b6cb0; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2563eb; }
     input[readonly] { background: #e2e8f0; color: #334155; font-weight: 600; cursor: not-allowed; }
     textarea { min-height: 86px; resize: vertical; }
 
@@ -300,7 +396,6 @@
 
     /* ==================== ADMIN SHELL ==================== */
     .admin-shell { min-height: 100vh; display: flex; flex-direction: column; }
-
     .admin-body { display: flex; flex: 1; }
 
     .admin-sidebar {
@@ -335,7 +430,6 @@
       text-align: center; font-size: 12.5px; color: #64748b; padding: 18px 0 6px;
     }
 
-    /* Dashboard KPI & Filters */
     .kpi-grid {
       display: grid; grid-template-columns: repeat(3, 1fr) 1.4fr; gap: 14px; margin-bottom: 16px;
     }
@@ -353,7 +447,7 @@
 
     .bar-row { display: grid; grid-template-columns: 86px 1fr 34px; align-items: center; gap: 8px; font-size: 12.5px; margin-top: 8px; }
     .bar-track { height: 11px; background: #eef2f6; border-radius: 999px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 999px; }
+    .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
 
     .dash-filter-grid {
       display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; align-items: end;
@@ -364,25 +458,163 @@
     .mid-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 14px; margin-bottom: 16px; }
     @media (max-width: 860px) { .mid-grid { grid-template-columns: 1fr; } }
 
+    /* ==================== DASHBOARD GRAPH PAGE ==================== */
+    .graph-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .graph-legend {
+      display: flex;
+      gap: 14px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .chart-columns {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      gap: 18px;
+      min-height: 220px;
+      padding: 20px 14px 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+    }
+    .chart-col-group {
+      flex: 1;
+      max-width: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .chart-bars-pair {
+      height: 155px;
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 10px;
+      border-bottom: 2px solid #cbd5e1;
+      padding-bottom: 4px;
+    }
+    .v-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      width: 28px;
+    }
+    .v-bar-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 3px;
+    }
+    .v-bar {
+      width: 100%;
+      min-height: 4px;
+      border-radius: 5px 5px 0 0;
+      transition: height 0.25s ease;
+    }
+    .chart-col-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      text-align: center;
+    }
+
     .table-wrap { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-size: 13px; }
     th {
       text-align: left; padding: 9px 10px; background: #f8fafc; color: #475569;
       font-weight: 700; border-bottom: 1px solid #e2e8f0; white-space: nowrap;
     }
-    td { padding: 9px 10px; border-bottom: 1px solid #f1f5f9; color: #1e293b; vertical-align: top; }
+    td { padding: 9px 10px; border-bottom: 1px solid #f1f5f9; color: #1e293b; vertical-align: middle; }
+    .completed-grid-table th,
+    .completed-grid-table td {
+      border: 1px solid #e2e8f0;
+      padding: 8px 10px;
+      font-size: 12.5px;
+    }
+    .completed-grid-table th {
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+    .completed-grid-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .comp-toolbar {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 960px) {
+      .comp-toolbar { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .comp-toolbar { grid-template-columns: 1fr; }
+    }
 
     .badge { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
     .badge-pending { background: #fef3c7; color: #b45309; }
     .badge-done { background: #dcfce7; color: #15803d; }
+    .badge-user { background: #e0f2fe; color: #0369a1; }
+    .badge-support { background: #ede9fe; color: #5b21b6; }
+    .badge-multi { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
 
-    /* Pending Tickets Cards Style */
-    .group-filter-bar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .pending-top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .group-filter-bar { display: flex; gap: 8px; flex-wrap: wrap; }
     .grp-pill {
       padding: 7px 14px; border-radius: 999px; border: 1px solid #cbd5e1;
       background: #f8fafc; color: #334155; font-size: 12.5px; font-weight: 700; cursor: pointer;
     }
     .grp-pill.active { background: #2b6cb0; color: #fff; border-color: #2b6cb0; }
+
+    .btn-add-ticket-inline {
+      background: #1d4ed8;
+      color: #ffffff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-add-ticket-inline:hover { background: #1e40af; }
+
+    .inline-new-ticket-panel {
+      display: none;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .inline-new-ticket-panel.open { display: block; }
 
     .ticket-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px;
@@ -398,18 +630,186 @@
       background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 7px;
       padding: 9px 11px; font-size: 13px; color: #0f172a; margin-bottom: 10px;
     }
-    .ticket-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ticket-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .btn-sm {
-      padding: 7px 11px; border-radius: 6px; border: none; font-size: 12px;
-      font-weight: 700; cursor: pointer;
+      padding: 6px 10px; border-radius: 6px; border: none; font-size: 12px;
+      font-weight: 700; cursor: pointer; white-space: nowrap;
     }
     .btn-photo { background: #e2e8f0; color: #0f172a; }
     .btn-complete { background: #16a34a; color: #fff; }
-    .btn-wa { background: #22c55e; color: #fff; text-decoration: none; display: inline-flex; align-items: center; }
+    .btn-wa { background: #22c55e; color: #fff; display: inline-flex; align-items: center; }
 
-    /* Admin New Ticket & Create User Cards */
-    .admin-form-box { max-width: 740px; }
-    .create-box { max-width: 520px; }
+    /* ==================== USERS MANAGEMENT ==================== */
+    .users-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .users-search-wrap {
+      flex: 1;
+      min-width: 240px;
+      max-width: 440px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .users-search-wrap input { padding-right: 36px; border-radius: 7px; }
+    .users-search-icon {
+      position: absolute;
+      right: 11px;
+      color: #64748b;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .users-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-outline-action {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      padding: 9px 14px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .btn-outline-action:hover { background: #f1f5f9; border-color: #94a3b8; }
+    .btn-add-user {
+      background: #1d4ed8;
+      color: #ffffff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-add-user:hover { background: #1e40af; }
+
+    .counter-chips-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 10px;
+      background: #f8fafc;
+      max-height: 185px;
+      overflow-y: auto;
+    }
+    .counter-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .select-all-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1d4ed8;
+      cursor: pointer;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .select-all-label input[type="checkbox"] { width: 15px; height: 15px; margin: 0; cursor: pointer; }
+    .counter-check-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .counter-check-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .counter-check-item input[type="checkbox"] { width: 14px; height: 14px; margin: 0; cursor: pointer; }
+    .selected-counters-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .sel-pill {
+      background: #dbeafe;
+      color: #1e3a8a;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .status-action-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+    }
+    .btn-row-icon {
+      background: #f1f5f9;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .btn-row-icon:hover { background: #e2e8f0; }
+
+    .status-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .status-switch input { display: none; }
+    .switch-track {
+      width: 40px;
+      height: 22px;
+      background: #cbd5e1;
+      border-radius: 999px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .switch-thumb {
+      width: 16px;
+      height: 16px;
+      background: #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .status-switch input:checked + .switch-track { background: #1d4ed8; }
+    .status-switch input:checked + .switch-track .switch-thumb { transform: translateX(18px); }
+    .switch-label-text { font-size: 12px; font-weight: 700; }
+
     .checkbox-row {
       display: flex; align-items: center; gap: 9px; margin-bottom: 14px;
       background: #f8fafc; padding: 10px 12px; border-radius: 7px; border: 1px solid #cbd5e1;
@@ -417,7 +817,6 @@
     .checkbox-row input[type="checkbox"] { width: 16px; height: 16px; margin: 0; }
     .checkbox-row label { margin: 0; cursor: pointer; font-size: 13px; }
 
-    /* Modals */
     .modal-backdrop {
       position: fixed; inset: 0; background: rgba(15, 23, 42, 0.58);
       display: none; align-items: center; justify-content: center; padding: 16px; z-index: 300;
@@ -426,7 +825,10 @@
     .modal-box {
       background: #fff; border-radius: 12px; padding: 20px; width: 100%; max-width: 410px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.24);
+      max-height: 90vh;
+      overflow-y: auto;
     }
+    .modal-box.user-modal { max-width: 560px; }
     .modal-box.photo-modal { max-width: 680px; }
     .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
     .btn-cancel {
@@ -442,8 +844,101 @@
 </head>
 <body>
 
+<!-- ==================== 0. MAIN LOGIN SCREEN ==================== -->
+<div class="login-screen" id="loginScreenView">
+  <div class="login-hero">
+    <div class="hero-content">
+      <div class="hero-brand-row">
+        <img
+          alt="Wheelsmart Emblem"
+          src='data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 105"><rect width="210" height="105" fill="%23ffffff"/><rect x="78" y="7" width="42" height="9" rx="4.5" fill="%23f59e0b"/><path d="M128 7 H148 C154 7,156 13,152 18 H128 Z" fill="%23f59e0b"/><rect x="44" y="20" width="76" height="9" rx="4.5" fill="%230284c7"/><path d="M68 41 C52 27,20 33,14 55 C10 71,22 85,42 83 C54 82,62 75,66 67 L54 63 C51 69,45 72,39 71 C29 69,24 61,27 52 C30 43,44 40,54 47 Z" fill="%230284c7"/><circle cx="41" cy="57" r="4.8" fill="%230284c7"/><path d="M72 33 L86 33 L94 63 L106 33 L120 33 L98 83 L84 83 L78 57 L66 83 L54 83 Z" fill="%230284c7"/><path d="M114 33 L128 33 L132 53 L148 33 L164 33 L142 57 L156 83 L140 83 L130 65 L124 83 L110 83 Z" fill="%23f59e0b"/><path d="M154 35 C174 33,196 45,196 65 C196 79,182 87,162 85 L160 73 C174 74,182 69,182 61 C182 51,168 45,154 47 Z" fill="%23f59e0b"/><circle cx="168" cy="59" r="4.8" fill="%23f59e0b"/><text x="105" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" font-weight="800" fill="%23475569" letter-spacing="1.2">WHEELSMART</text></svg>'
+        />
+        <div>
+          <div class="hero-wordmark">wheel<span class="accent">smart</span></div>
+        </div>
+      </div>
+
+      <div class="hero-sub">IT DEPARTMENT • SERVICE REQUEST PORTAL</div>
+    </div>
+  </div>
+
+  <div class="login-panel-side">
+    <div class="login-card">
+      <h1 class="login-title">LOGIN</h1>
+
+      <div id="mainLoginError" class="status-err" style="display:none;margin-bottom:12px;"></div>
+
+      <!-- USERNAME + PASSWORD LOGIN SECTION -->
+      <div id="usernameLoginSection">
+        <form id="portalLoginForm" onsubmit="handlePortalLogin(event)">
+          <div class="field">
+            <div class="input-icon-wrap">
+              <span class="input-icon">@</span>
+              <input type="text" id="portalUserId" placeholder="Enter user name / ID" autocomplete="username" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="input-icon-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="portalPassword" placeholder="Enter Password" autocomplete="current-password" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="input-icon-wrap">
+              <span class="input-icon">▾</span>
+              <select id="loginPageType" aria-label="Select Login Page">
+                <option value="User" selected>User</option>
+                <option value="Support">Support</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;margin-top:6px;">
+            <button type="submit" class="btn-signin" id="btnPortalSignIn">Sign In</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- PHONE NUMBER + OTP LOGIN SECTION -->
+      <div class="mobile-otp-box" id="mobileOtpBox">
+        <div class="field" style="margin-bottom:10px;">
+          <label for="loginMobileInput">Phone Number</label>
+          <div class="input-icon-wrap">
+            <span class="input-icon">📱</span>
+            <input type="tel" id="loginMobileInput" maxlength="15" placeholder="Enter 10-digit phone number" />
+          </div>
+        </div>
+
+        <div class="field" style="margin-bottom:12px;">
+          <label for="loginOtpInput">OTP</label>
+          <div class="input-icon-wrap">
+            <span class="input-icon">🔑</span>
+            <input type="text" id="loginOtpInput" maxlength="8" inputmode="numeric" placeholder="Enter OTP" />
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" style="width:100%;" id="btnMobileOtpContinue" onclick="handleMobileOtpContinue()">
+          Continue with Phone &amp; OTP
+        </button>
+      </div>
+
+      <div class="login-divider">OR</div>
+
+      <button type="button" class="btn-mobile-login" id="btnToggleMobileOtp" onclick="toggleMobileOtpSection()">
+        Login with Phone Number
+      </button>
+
+      <div class="login-footer-note">
+        Wheelsmart IT Portal • © 2026
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== 1. USER PORTAL VIEW ==================== -->
-<div class="user-wrap" id="userPortalView">
+<div class="user-wrap" id="userPortalView" style="display:none;">
   <div class="sign-banner user-banner">
     <div class="sign-center">
       <div class="sign-wordmark-row">
@@ -453,10 +948,12 @@
           <circle cx="24" cy="17" r="4.5" fill="#ffffff"/>
         </svg>
       </div>
-      <div class="sign-sub">IT DEPARTMENT • SERVICE REQUEST PORTAL</div>
+      <div class="sign-sub">IT DEPARTMENT • USER SERVICE PORTAL</div>
     </div>
 
     <div class="sign-right">
+      <span class="logged-pill" id="userBadgeText">User</span>
+      <button type="button" class="btn-top-logout" onclick="logoutToLoginScreen()">↪ Logout</button>
       <div class="logo-slot-right" title="Right Logo">
         <img
           id="rightLogoImg"
@@ -466,19 +963,18 @@
           src='data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 105"><rect width="210" height="105" fill="%23ffffff"/><rect x="78" y="7" width="42" height="9" rx="4.5" fill="%23f59e0b"/><path d="M128 7 H148 C154 7,156 13,152 18 H128 Z" fill="%23f59e0b"/><rect x="44" y="20" width="76" height="9" rx="4.5" fill="%230284c7"/><path d="M68 41 C52 27,20 33,14 55 C10 71,22 85,42 83 C54 82,62 75,66 67 L54 63 C51 69,45 72,39 71 C29 69,24 61,27 52 C30 43,44 40,54 47 Z" fill="%230284c7"/><circle cx="41" cy="57" r="4.8" fill="%230284c7"/><path d="M72 33 L86 33 L94 63 L106 33 L120 33 L98 83 L84 83 L78 57 L66 83 L54 83 Z" fill="%230284c7"/><path d="M114 33 L128 33 L132 53 L148 33 L164 33 L142 57 L156 83 L140 83 L130 65 L124 83 L110 83 Z" fill="%23f59e0b"/><path d="M154 35 C174 33,196 45,196 65 C196 79,182 87,162 85 L160 73 C174 74,182 69,182 61 C182 51,168 45,154 47 Z" fill="%23f59e0b"/><circle cx="168" cy="59" r="4.8" fill="%23f59e0b"/><text x="105" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-size="13.5" font-weight="800" fill="%23475569" letter-spacing="1.2">WHEELSMART</text></svg>'
         />
       </div>
-      <button type="button" class="btn-staff-login" onclick="openStaffLoginModal()">Staff Login</button>
     </div>
   </div>
 
-  <!-- Mobile Number Status Check -->
+  <!-- Phone Number Status Check (Pending Only) -->
   <div class="card">
-    <h3>📱 Check Status by Mobile Number</h3>
+    <h3>📱 Check Pending Status by Phone Number</h3>
     <div class="status-row">
       <input
         type="tel"
         id="searchPhoneInput"
         maxlength="15"
-        placeholder="Enter 10-digit mobile number (e.g. 9876543210)"
+        placeholder="Enter 10-digit phone number (e.g. 9876543210)"
         onkeydown="if(event.key==='Enter'){ event.preventDefault(); searchByMobileNumber(); }"
       />
       <button type="button" class="btn-check" id="btnSearchPhone" onclick="searchByMobileNumber()">Check</button>
@@ -503,7 +999,7 @@
           <input type="text" id="reqDate" name="reqDate" readonly />
         </div>
         <div class="field">
-          <label for="empName">Employee Name *</label>
+          <label for="empName" id="userEmpNameLabel">Employee Name *</label>
           <input
             type="text"
             id="empName"
@@ -517,11 +1013,13 @@
 
       <div class="grid-2">
         <div class="field">
-          <label for="whatsapp">WhatsApp Number *</label>
-          <input type="tel" id="whatsapp" name="whatsapp" placeholder="10-digit mobile number" maxlength="15" required />
+          <label for="whatsapp">Phone Number *</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="10-digit phone number" maxlength="15" required />
         </div>
         <div class="field">
-          <label for="counterSearch">Counter *</label>
+          <label for="counterSearch" id="userCounterLabel">Counter *</label>
+          <select id="userAssignedCounterSelect" style="display:none;" onchange="onAssignedCounterSelectChange()"></select>
+
           <div class="combo-wrap" id="counterComboWrap">
             <input
               type="text"
@@ -572,7 +1070,7 @@
         <textarea
           id="issue"
           name="issue"
-          placeholder="Describe your issue clearly (Vehicle numbers stay UPPERCASE)..."
+          placeholder="Describe your issue clearly (First letter capital; vehicle numbers stay UPPERCASE)..."
           oninput="formatDescriptionInput(this)"
           required
         ></textarea>
@@ -591,7 +1089,7 @@
   </div>
 </div>
 
-<!-- ==================== 2. ADMIN PORTAL SHELL ==================== -->
+<!-- ==================== 2. SUPPORT / ADMIN PORTAL SHELL ==================== -->
 <div class="admin-shell" id="adminPortalView" style="display:none;">
   <div class="sign-banner admin-topbar">
     <div class="sign-center">
@@ -602,13 +1100,13 @@
           <circle cx="24" cy="17" r="4.5" fill="#ffffff"/>
         </svg>
       </div>
-      <div class="sign-sub">IT DEPARTMENT • SERVICE REQUEST PORTAL</div>
+      <div class="sign-sub">IT DEPARTMENT • SUPPORT PORTAL</div>
     </div>
 
     <div class="admin-right-cluster">
       <div class="admin-user-controls">
-        <span class="logged-pill" id="staffBadgeText">admin</span>
-        <button type="button" class="btn-top-logout" onclick="logoutStaff()">↪ Logout</button>
+        <span class="logged-pill" id="staffBadgeText">support</span>
+        <button type="button" class="btn-top-logout" onclick="logoutToLoginScreen()">↪ Logout</button>
       </div>
 
       <div class="logo-slot-right" title="Right Logo">
@@ -631,11 +1129,11 @@
       <button type="button" class="side-btn" id="sideBtnPending" onclick="switchAdminScreen('pending')">
         <span>📋</span> Pending Tickets
       </button>
-      <button type="button" class="side-btn" id="sideBtnNewTicket" onclick="switchAdminScreen('newTicket')">
-        <span>🎫</span> New Ticket
+      <button type="button" class="side-btn" id="sideBtnCompleted" onclick="switchAdminScreen('completed')">
+        <span>✅</span> Complete Tickets
       </button>
-      <button type="button" class="side-btn" id="sideBtnCreateUser" onclick="switchAdminScreen('createUser')" style="display:none;">
-        <span>👤</span> Create User ID
+      <button type="button" class="side-btn" id="sideBtnUsers" onclick="switchAdminScreen('users')" style="display:none;">
+        <span>👥</span> Users
       </button>
     </aside>
 
@@ -739,6 +1237,19 @@
             </div>
           </div>
 
+          <!-- DASHBOARD GRAPH SECTION (FILTER WORKFLOW) -->
+          <div class="card">
+            <div class="graph-header-bar">
+              <h2 style="border-bottom:none;margin:0;padding-bottom:0;">📈 Group-Wise Tickets Graph (Filtered)</h2>
+              <div class="graph-legend">
+                <span><i class="legend-dot" style="background:#f59e0b;"></i>Pending</span>
+                <span><i class="legend-dot" style="background:#16a34a;"></i>Completed</span>
+                <span><i class="legend-dot" style="background:#2563eb;"></i>Total</span>
+              </div>
+            </div>
+            <div class="chart-columns" id="dashboardGraphChart"></div>
+          </div>
+
           <div class="mid-grid">
             <div class="card" style="margin-bottom:0;">
               <h2>IT Team Performance</h2>
@@ -776,34 +1287,9 @@
               </div>
             </div>
           </div>
-
-          <div class="card">
-            <h2>Service Requests (<span id="recordsCountLabel">0</span>)</h2>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Ticket ID</th>
-                    <th>Date</th>
-                    <th>Counter</th>
-                    <th>Cluster</th>
-                    <th>Employee</th>
-                    <th>Mobile Number</th>
-                    <th>Group &amp; Category</th>
-                    <th>Issue</th>
-                    <th>Status</th>
-                    <th>Completed By</th>
-                  </tr>
-                </thead>
-                <tbody id="requestsTableBody">
-                  <tr><td colspan="10" class="empty-state">Loading tickets...</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </div>
 
-        <!-- SCREEN 2: PENDING TICKETS -->
+        <!-- SCREEN 2: PENDING TICKETS (+ NEW TICKET INSIDE) -->
         <div id="screenPending" style="display:none;">
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px;">
             <div class="kpi-box" style="padding:11px 14px;">
@@ -833,11 +1319,105 @@
           </div>
 
           <div class="card">
-            <div class="group-filter-bar" id="pendingGroupTabs">
-              <button type="button" class="grp-pill active" data-grp="All" onclick="setPendingGroupTab('All')">All</button>
-              <button type="button" class="grp-pill" data-grp="Networking" onclick="setPendingGroupTab('Networking')">Networking</button>
-              <button type="button" class="grp-pill" data-grp="Hardware" onclick="setPendingGroupTab('Hardware')">Hardware</button>
-              <button type="button" class="grp-pill" data-grp="Software" onclick="setPendingGroupTab('Software')">Software</button>
+            <div class="pending-top-bar">
+              <div class="group-filter-bar" id="pendingGroupTabs">
+                <button type="button" class="grp-pill active" data-grp="All" onclick="setPendingGroupTab('All')">All</button>
+                <button type="button" class="grp-pill" data-grp="Networking" onclick="setPendingGroupTab('Networking')">Networking</button>
+                <button type="button" class="grp-pill" data-grp="Hardware" onclick="setPendingGroupTab('Hardware')">Hardware</button>
+                <button type="button" class="grp-pill" data-grp="Software" onclick="setPendingGroupTab('Software')">Software</button>
+              </div>
+              <button type="button" class="btn-add-ticket-inline" onclick="toggleInlineNewTicket()">+ New Ticket</button>
+            </div>
+
+            <div class="inline-new-ticket-panel" id="inlineNewTicketPanel">
+              <h3 style="margin:0 0 12px;">Add New IT Service Request</h3>
+              <div id="adminNewTicketMsg" class="msg"></div>
+              <form id="adminTicketForm" onsubmit="submitAdminNewTicket(event)">
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="admReqDate">Date (Auto)</label>
+                    <input type="text" id="admReqDate" readonly />
+                  </div>
+                  <div class="field">
+                    <label for="admEmpName">Employee Name *</label>
+                    <input type="text" id="admEmpName" placeholder="Employee full name" oninput="formatCapInput(this)" required />
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="admWhatsapp">Phone Number *</label>
+                    <input type="tel" id="admWhatsapp" placeholder="10-digit phone number" maxlength="15" required />
+                  </div>
+                  <div class="field">
+                    <label for="admCounterSearch">Counter *</label>
+                    <div class="combo-wrap" id="admCounterComboWrap">
+                      <input
+                        type="text"
+                        id="admCounterSearch"
+                        placeholder="Type counter & press Enter..."
+                        autocomplete="off"
+                        onfocus="openAdmCounterDropdown()"
+                        oninput="filterAdmCounters()"
+                        onkeydown="handleAdmCounterKeydown(event)"
+                        required
+                      />
+                      <input type="hidden" id="admCounter" />
+                      <div class="combo-list" id="admCounterDropdown"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-2">
+                  <div class="field">
+                    <label for="admGroupSelect">IT Support Group *</label>
+                    <select id="admGroupSelect" onchange="onAdmGroupChange()" required>
+                      <option value="">-- Select Group --</option>
+                      <option value="Networking">Networking</option>
+                      <option value="Hardware">Hardware</option>
+                      <option value="Software">Software</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="admCategorySelect">Category *</label>
+                    <select id="admCategorySelect" required>
+                      <option value="">-- Select Group First --</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="admUrgency">Urgency</label>
+                  <select id="admUrgency">
+                    <option value="Low">Low</option>
+                    <option value="Medium" selected>Medium</option>
+                    <option value="High">High</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="admIssue">Problem Description *</label>
+                  <textarea
+                    id="admIssue"
+                    placeholder="Describe the issue clearly (First letter capital; vehicle numbers stay UPPERCASE)..."
+                    oninput="formatDescriptionInput(this)"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="field">
+                  <label for="admPhoto">Attach Photo / Screenshot (Optional)</label>
+                  <div class="file-box">
+                    <input type="file" id="admPhoto" accept="image/*" />
+                    <div class="file-note">Max ~2MB recommended. Auto-compressed for fast upload.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:8px;justify-content:flex-end;">
+                  <button type="button" class="btn-cancel" onclick="toggleInlineNewTicket(false)">Cancel</button>
+                  <button type="submit" class="btn-primary" id="btnAdmSubmitTicket">Create Service Request</button>
+                </div>
+              </form>
             </div>
 
             <div class="ticket-grid" id="pendingTicketsGrid">
@@ -846,127 +1426,137 @@
           </div>
         </div>
 
-        <!-- SCREEN 3: NEW TICKET (ABOVE CREATE USER ID) -->
-        <div id="screenNewTicket" style="display:none;">
-          <div class="card admin-form-box">
-            <h2>Add New IT Service Request</h2>
-            <div id="adminNewTicketMsg" class="msg"></div>
-            <form id="adminTicketForm" onsubmit="submitAdminNewTicket(event)">
-              <div class="grid-2">
-                <div class="field">
-                  <label for="admReqDate">Date (Auto)</label>
-                  <input type="text" id="admReqDate" readonly />
-                </div>
-                <div class="field">
-                  <label for="admEmpName">Employee Name *</label>
-                  <input type="text" id="admEmpName" placeholder="Employee full name" oninput="formatCapInput(this)" required />
-                </div>
+        <!-- SCREEN 3: COMPLETE TICKETS (ALL COLUMNS GRID TABLE + FILTERS + SEARCH + EXPORT) -->
+        <div id="screenCompleted" style="display:none;">
+          <div class="card">
+            <h2 style="margin-bottom:12px;">Completed Tickets (<span id="completedCountLabel">0</span>)</h2>
+
+            <div class="comp-toolbar">
+              <div class="field" style="margin-bottom:0;">
+                <label for="compSearchInput">Search (Counter, Employee, Phone, Ticket ID)</label>
+                <input
+                  type="text"
+                  id="compSearchInput"
+                  placeholder="Type counter, employee name, phone or WS-1001..."
+                  oninput="renderCompletedTickets()"
+                />
               </div>
 
-              <div class="grid-2">
-                <div class="field">
-                  <label for="admWhatsapp">WhatsApp Number *</label>
-                  <input type="tel" id="admWhatsapp" placeholder="10-digit mobile number" maxlength="15" required />
-                </div>
-                <div class="field">
-                  <label for="admCounterSearch">Counter *</label>
-                  <div class="combo-wrap" id="admCounterComboWrap">
-                    <input
-                      type="text"
-                      id="admCounterSearch"
-                      placeholder="Type counter & press Enter..."
-                      autocomplete="off"
-                      onfocus="openAdmCounterDropdown()"
-                      oninput="filterAdmCounters()"
-                      onkeydown="handleAdmCounterKeydown(event)"
-                      required
-                    />
-                    <input type="hidden" id="admCounter" />
-                    <div class="combo-list" id="admCounterDropdown"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="grid-2">
-                <div class="field">
-                  <label for="admGroupSelect">IT Support Group *</label>
-                  <select id="admGroupSelect" onchange="onAdmGroupChange()" required>
-                    <option value="">-- Select Group --</option>
-                    <option value="Networking">Networking</option>
-                    <option value="Hardware">Hardware</option>
-                    <option value="Software">Software</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="admCategorySelect">Category *</label>
-                  <select id="admCategorySelect" required>
-                    <option value="">-- Select Group First --</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="admUrgency">Urgency</label>
-                <select id="admUrgency">
-                  <option value="Low">Low</option>
-                  <option value="Medium" selected>Medium</option>
-                  <option value="High">High</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="admIssue">Problem Description *</label>
-                <textarea
-                  id="admIssue"
-                  placeholder="Describe the issue clearly (Vehicle numbers stay UPPERCASE)..."
-                  oninput="formatDescriptionInput(this)"
-                  required
-                ></textarea>
-              </div>
-
-              <div class="field">
-                <label for="admPhoto">Attach Photo / Screenshot (Optional)</label>
-                <div class="file-box">
-                  <input type="file" id="admPhoto" accept="image/*" />
-                  <div class="file-note">Max ~2MB recommended. Auto-compressed for fast upload.</div>
-                </div>
-              </div>
-
-              <button type="submit" class="btn-submit" id="btnAdmSubmitTicket">Create Service Request</button>
-            </form>
-          </div>
-        </div>
-
-        <!-- SCREEN 4: CREATE USER ID -->
-        <div id="screenCreateUser" style="display:none;">
-          <div class="card create-box">
-            <h2>Create Staff User ID</h2>
-            <div id="createUserMsg" class="msg"></div>
-            <form id="createUserForm" onsubmit="handleCreateStaffUser(event)">
-              <div class="field">
-                <label for="newUserId">User ID *</label>
-                <input type="text" id="newUserId" placeholder="e.g. ramesh_net" required />
-              </div>
-              <div class="field">
-                <label for="newUserPassword">Password *</label>
-                <input type="text" id="newUserPassword" placeholder="Set password" required />
-              </div>
-              <div class="field">
-                <label for="newUserGroup">Group Access *</label>
-                <select id="newUserGroup" required>
-                  <option value="">-- Select Group Access --</option>
+              <div class="field" style="margin-bottom:0;">
+                <label for="compFilterGroup">IT Group</label>
+                <select id="compFilterGroup" onchange="renderCompletedTickets()">
+                  <option value="">All Groups</option>
                   <option value="Networking">Networking</option>
                   <option value="Hardware">Hardware</option>
                   <option value="Software">Software</option>
-                  <option value="All">All Groups</option>
                 </select>
               </div>
-              <div class="checkbox-row">
-                <input type="checkbox" id="allowUserCreationCheckbox" />
-                <label for="allowUserCreationCheckbox">Give "Create User ID" access to this user</label>
+
+              <div class="field" style="margin-bottom:0;">
+                <label for="compFilterZone">Zone</label>
+                <select id="compFilterZone" onchange="renderCompletedTickets()">
+                  <option value="">All Zones</option>
+                  <option value="ZONE1">ZONE1</option>
+                  <option value="ZONE2">ZONE2</option>
+                  <option value="ZONE3">ZONE3</option>
+                </select>
               </div>
-              <button type="submit" class="btn-submit" id="btnCreateUser">Create User ID</button>
-            </form>
+
+              <div class="field" style="margin-bottom:0;">
+                <label for="compFilterDate">Completed Date</label>
+                <select id="compFilterDate" onchange="renderCompletedTickets()">
+                  <option value="">All Completed Dates</option>
+                </select>
+              </div>
+
+              <div class="field" style="margin-bottom:0;display:flex;gap:6px;">
+                <button type="button" class="btn-cancel" style="padding:9px 12px;" onclick="resetCompletedFilters()">Reset</button>
+                <button type="button" class="btn-outline-action" onclick="exportCompletedTicketsCsv()">📤 Export</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="completed-grid-table">
+                <thead>
+                  <tr>
+                    <th>Ticket ID</th>
+                    <th>Date</th>
+                    <th>Completed Date</th>
+                    <th>Zone</th>
+                    <th>Division</th>
+                    <th>Cluster</th>
+                    <th>Counter</th>
+                    <th>Employee</th>
+                    <th>Phone</th>
+                    <th>Group</th>
+                    <th>Category</th>
+                    <th>Issue</th>
+                    <th>Urgency</th>
+                    <th>Completed By</th>
+                    <th>Remarks</th>
+                    <th>Photo</th>
+                    <th>WhatsApp</th>
+                  </tr>
+                </thead>
+                <tbody id="completedTicketsTableBody">
+                  <tr><td colspan="17" class="empty-state">Loading completed tickets...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCREEN 4: USERS -->
+        <div id="screenUsers" style="display:none;">
+          <div class="card">
+            <h2 style="border-bottom:none;margin-bottom:12px;padding-bottom:0;">
+              All Users (<span id="usersCountLabel">0</span>)
+            </h2>
+
+            <div class="users-toolbar">
+              <div class="users-search-wrap">
+                <input
+                  type="text"
+                  id="usersSearchInput"
+                  placeholder="Search user ID, name, phone, counter, role..."
+                  oninput="renderUsersTable()"
+                />
+                <span class="users-search-icon">🔍</span>
+              </div>
+
+              <div class="users-actions-right">
+                <input type="file" id="bulkImportFileInput" accept=".csv,.txt" style="display:none;" onchange="handleBulkImportFile(event)" />
+                <button type="button" class="btn-outline-action" onclick="document.getElementById('bulkImportFileInput').click()">
+                  📥 Import
+                </button>
+                <button type="button" class="btn-outline-action" onclick="exportUsersToCsv()">
+                  📤 Export
+                </button>
+                <button type="button" class="btn-add-user" onclick="openCreateUserModal()">
+                  + Create User
+                </button>
+              </div>
+            </div>
+
+            <div id="usersScreenMsg" class="msg"></div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>User ID</th>
+                    <th>Employee Name</th>
+                    <th>Phone Number</th>
+                    <th>Counter</th>
+                    <th>Role</th>
+                    <th>Status &amp; Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                  <tr><td colspan="6" class="empty-state">Loading users from Google Sheet...</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -976,25 +1566,102 @@
   </div>
 </div>
 
-<!-- ==================== STAFF LOGIN MODAL ==================== -->
-<div class="modal-backdrop" id="staffLoginModal">
-  <div class="modal-box">
-    <h3 style="margin:0 0 12px;">IT Staff Login</h3>
-    <div id="loginErrorMsg" class="status-err" style="display:none;margin-bottom:10px;"></div>
-    <form onsubmit="submitStaffLogin(event)">
-      <div class="field">
-        <label for="loginUserId">User ID</label>
-        <input type="text" id="loginUserId" placeholder="Enter User ID" required />
+<!-- ==================== CREATE / EDIT USER MODAL ==================== -->
+<div class="modal-backdrop" id="createUserModal">
+  <div class="modal-box user-modal">
+    <h3 style="margin:0 0 12px;" id="userModalTitle">Create User</h3>
+    <div id="createUserMsg" class="msg"></div>
+    <form id="createUserForm" onsubmit="handleCreateStaffUser(event)">
+      <div class="grid-2">
+        <div class="field">
+          <label for="newUserId">User ID (Auto CAPITAL) *</label>
+          <input
+            type="text"
+            id="newUserId"
+            placeholder="e.g. WMS3105"
+            oninput="forceUppercaseInput(this)"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="newUserPassword">Password *</label>
+          <input type="text" id="newUserPassword" placeholder="Set password" required />
+        </div>
       </div>
-      <div class="field">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter Password" required />
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="newEmpName">Employee Name *</label>
+          <input type="text" id="newEmpName" placeholder="Full name" oninput="formatCapInput(this)" required />
+        </div>
+        <div class="field">
+          <label for="newMobileNumber">Phone Number *</label>
+          <input type="tel" id="newMobileNumber" maxlength="15" placeholder="10-digit phone number" required />
+        </div>
       </div>
+
+      <div class="field">
+        <div class="counter-header-bar">
+          <label style="margin:0;">Counter Access (Select 1 or Multiple Counters) *</label>
+          <label class="select-all-label">
+            <input type="checkbox" id="selectAllCountersCheckbox" onchange="toggleSelectAllCounters(this.checked)" />
+            <span>Select All</span>
+          </label>
+        </div>
+        <div class="counter-chips-box">
+          <input
+            type="text"
+            id="modalCounterFilter"
+            placeholder="Filter counters..."
+            oninput="renderModalCounterCheckboxes()"
+            style="padding:6px 10px;font-size:12.5px;"
+          />
+          <div class="counter-check-list" id="modalCounterCheckboxes"></div>
+        </div>
+        <div class="selected-counters-pills" id="selectedCountersPreview"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="newUserRoleType">User or Support *</label>
+          <select id="newUserRoleType" onchange="onNewUserRoleChange()" required>
+            <option value="User" selected>User</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+        <div class="field" id="supportGroupField" style="display:none;">
+          <label for="newUserGroup">Support Group Access</label>
+          <select id="newUserGroup">
+            <option value="All">All Groups</option>
+            <option value="Networking">Networking</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="checkbox-row" id="supportCreatePermRow" style="display:none;">
+        <input type="checkbox" id="allowUserCreationCheckbox" checked />
+        <label for="allowUserCreationCheckbox">Give "Users" management access to this Support user</label>
+      </div>
+
       <div class="modal-actions">
-        <button type="button" class="btn-cancel" onclick="closeStaffLoginModal()">Cancel</button>
-        <button type="submit" class="btn-primary" id="btnLoginSubmit">Login</button>
+        <button type="button" class="btn-cancel" onclick="closeCreateUserModal()">Cancel</button>
+        <button type="submit" class="btn-primary" id="btnCreateUser">Save User</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- ==================== VIEW USER MODAL ==================== -->
+<div class="modal-backdrop" id="viewUserModal">
+  <div class="modal-box">
+    <h3 style="margin:0 0 12px;">User Details</h3>
+    <div id="viewUserContent" style="font-size:13.5px;line-height:1.65;color:#1e293b;"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn-cancel" onclick="closeViewUserModal()">Close</button>
+      <button type="button" class="btn-primary" id="btnViewModalEdit">Edit User</button>
+    </div>
   </div>
 </div>
 
@@ -1032,6 +1699,12 @@
 
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz1sIz2cipR99VMTRMBYRDC0sf0DC2e0TudJb4CBtfJ4mAKO5W6F-pAOssDyFeNq-oP7w/exec";
+  const LOCAL_USERS_STORAGE_KEY = "wheelsmart_it_users_v1";
+  const WA_SENT_STORAGE_KEY = "wheelsmart_wa_sent_tickets_v1";
+  const PHOTO_CACHE_STORAGE_KEY = "wheelsmart_ticket_photos_v1";
+  const COMPLETED_META_STORAGE_KEY = "wheelsmart_completed_meta_v1";
+  const SESSION_STORAGE_KEY = "wheelsmart_portal_session_4d_v1";
+  const FOUR_DAYS_MS = 4 * 24 * 60 * 60 * 1000;
 
   let COUNTERS_LIST = [];
   let FILTERED_COUNTERS = [];
@@ -1047,13 +1720,162 @@
   };
 
   let CURRENT_STAFF = null;
+  let CURRENT_USER_SESSION = null;
   let ALL_TICKETS = [];
+  let FILTERED_COMPLETED_TICKETS = [];
+  let USERS_LIST = loadCachedUsers();
+  let WA_SENT_MAP = loadWaSentMap();
+  let PHOTO_CACHE_MAP = loadPhotoCacheMap();
+  let COMPLETED_META_MAP = loadCompletedMetaMap();
+  let SELECTED_NEW_USER_COUNTERS = [];
+  let EDITING_USER_INDEX = -1;
   let ACTIVE_PENDING_GROUP = "All";
   let COMPLETION_TARGET_TICKET = null;
   let AUTO_SYNC_TIMER = null;
   let ADMIN_BANNER_TIMER = null;
+  let IS_MOBILE_OTP_MODE = false;
 
   const VEHICLE_NO_REGEX = /\b([A-Za-z]{2})\s*-?\s*(\d{1,2})\s*-?\s*([A-Za-z]{1,3})\s*-?\s*(\d{1,4})\b/g;
+
+  /* ==================== 4-DAY PERSISTENT SESSION ==================== */
+  function saveSession4Days(mode, payload) {
+    try {
+      const record = {
+        mode: mode,
+        payload: payload,
+        expiresAt: Date.now() + FOUR_DAYS_MS
+      };
+      localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(record));
+    } catch (_) {}
+  }
+
+  function clearSavedSession() {
+    try {
+      localStorage.removeItem(SESSION_STORAGE_KEY);
+    } catch (_) {}
+  }
+
+  function restoreSessionIfValid() {
+    try {
+      const raw = localStorage.getItem(SESSION_STORAGE_KEY);
+      if (!raw) return false;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.expiresAt || Date.now() > Number(parsed.expiresAt)) {
+        clearSavedSession();
+        return false;
+      }
+      if (parsed.mode === "admin" && parsed.payload) {
+        CURRENT_STAFF = parsed.payload;
+        enterAdminView(true);
+        return true;
+      }
+      if (parsed.mode === "user" && parsed.payload) {
+        enterUserView(parsed.payload, true);
+        return true;
+      }
+    } catch (_) {}
+    return false;
+  }
+
+  function loadCachedUsers() {
+    try {
+      const raw = localStorage.getItem(LOCAL_USERS_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveCachedUsers() {
+    try {
+      localStorage.setItem(LOCAL_USERS_STORAGE_KEY, JSON.stringify(USERS_LIST));
+    } catch (_) {}
+  }
+
+  function loadWaSentMap() {
+    try {
+      const raw = localStorage.getItem(WA_SENT_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return (parsed && typeof parsed === "object") ? parsed : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function saveWaSentMap() {
+    try {
+      localStorage.setItem(WA_SENT_STORAGE_KEY, JSON.stringify(WA_SENT_MAP));
+    } catch (_) {}
+  }
+
+  function loadPhotoCacheMap() {
+    try {
+      const raw = localStorage.getItem(PHOTO_CACHE_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return (parsed && typeof parsed === "object") ? parsed : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function savePhotoCache(ticketId, dataUrl) {
+    if (!ticketId || !dataUrl) return;
+    try {
+      PHOTO_CACHE_MAP[ticketId] = dataUrl;
+      localStorage.setItem(PHOTO_CACHE_STORAGE_KEY, JSON.stringify(PHOTO_CACHE_MAP));
+    } catch (_) {}
+  }
+
+  function loadCompletedMetaMap() {
+    try {
+      const raw = localStorage.getItem(COMPLETED_META_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return (parsed && typeof parsed === "object") ? parsed : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function saveCompletedMeta(ticketId, completedDate, completedBy) {
+    if (!ticketId) return;
+    try {
+      COMPLETED_META_MAP[ticketId] = {
+        completedDate: completedDate || formatTodayDateOnly(),
+        completedBy: completedBy || ""
+      };
+      localStorage.setItem(COMPLETED_META_STORAGE_KEY, JSON.stringify(COMPLETED_META_MAP));
+    } catch (_) {}
+  }
+
+  function resolveTicketPhotoSrc(t) {
+    if (!t) return "";
+    if (t.photoDataUrl) return t.photoDataUrl;
+    if (t.photoUrl) return t.photoUrl;
+    if (t.ticketId && PHOTO_CACHE_MAP[t.ticketId]) return PHOTO_CACHE_MAP[t.ticketId];
+    return "";
+  }
+
+  function resolveTicketCompletedDate(t) {
+    if (!t) return formatTodayDateOnly();
+    const fromSheet = t.completedDate || t.completeDate || t.completed_date || "";
+    if (fromSheet) return String(fromSheet).trim();
+    if (t.ticketId && COMPLETED_META_MAP[t.ticketId] && COMPLETED_META_MAP[t.ticketId].completedDate) {
+      return COMPLETED_META_MAP[t.ticketId].completedDate;
+    }
+    return formatTodayDateOnly();
+  }
+
+  function forceUppercaseInput(el) {
+    if (!el) return;
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const up = String(el.value || "").toUpperCase();
+    if (up !== el.value) {
+      el.value = up;
+      try { el.setSelectionRange(start, end); } catch (e) {}
+    }
+  }
 
   function normalizeVehicleNumbers(str) {
     return String(str || "").replace(VEHICLE_NO_REGEX, function(_, st, dist, ser, num) {
@@ -1062,8 +1884,8 @@
   }
 
   function toTitleCaseLive(str) {
-    return String(str || "").replace(/(^|\s+)([a-zA-Z])/g, function(match, space, ch) {
-      return space + ch.toUpperCase();
+    return String(str || "").replace(/(^|\s+)([a-zA-Z])([a-zA-Z]*)/g, function(_, space, firstCh, restCh) {
+      return space + firstCh.toUpperCase() + restCh.toLowerCase();
     });
   }
 
@@ -1087,19 +1909,27 @@
     }
   }
 
-  function formatDescriptionLive(str) {
-    const capStart = String(str || "").replace(/(^|[.!?]\s+|\s+)([a-z])/g, function(_, prefix, ch) {
-      return prefix + ch.toUpperCase();
+  function toSentenceCaseWordsLive(str) {
+    return String(str || "").replace(/(^|[.!?]\s+|\s+)([a-zA-Z])([a-zA-Z]*)/g, function(_, prefix, firstCh, restCh) {
+      return prefix + firstCh.toUpperCase() + restCh.toLowerCase();
     });
-    return normalizeVehicleNumbers(capStart);
+  }
+
+  function toSentenceCaseWordsFinal(str) {
+    const cleaned = String(str || "").trim().replace(/\s+/g, " ");
+    return cleaned.replace(/(^|[.!?]\s+|\s+)([a-zA-Z])([a-zA-Z]*)/g, function(_, prefix, firstCh, restCh) {
+      return prefix + firstCh.toUpperCase() + restCh.toLowerCase();
+    });
+  }
+
+  function formatDescriptionLive(str) {
+    const cased = toSentenceCaseWordsLive(str);
+    return normalizeVehicleNumbers(cased);
   }
 
   function formatDescriptionFinal(str) {
-    const cleaned = String(str || "").trim().replace(/\s+/g, " ");
-    const capStart = cleaned.replace(/(^|[.!?]\s+|\s+)([a-z])/g, function(_, prefix, ch) {
-      return prefix + ch.toUpperCase();
-    });
-    return normalizeVehicleNumbers(capStart);
+    const cased = toSentenceCaseWordsFinal(str);
+    return normalizeVehicleNumbers(cased);
   }
 
   function formatDescriptionInput(el) {
@@ -1132,6 +1962,18 @@
       .replace(/"/g, "&quot;");
   }
 
+  function showMainLoginError(msg) {
+    const el = document.getElementById("mainLoginError");
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+
+  function clearMainLoginError() {
+    const el = document.getElementById("mainLoginError");
+    el.textContent = "";
+    el.style.display = "none";
+  }
+
   function showFormBanner(text, isErr) {
     const el = document.getElementById("formBanner");
     el.className = "msg " + (isErr ? "err" : "ok");
@@ -1158,6 +2000,333 @@
         el.innerHTML = "";
       }, delay);
     }
+  }
+
+  function normalizeCounterList(raw) {
+    if (!raw) return [];
+    if (Array.isArray(raw)) {
+      return raw.map(c => String(c || "").trim()).filter(Boolean);
+    }
+    return String(raw).split(/[,;|]+/).map(c => c.trim()).filter(Boolean);
+  }
+
+  /* ==================== TOGGLE USERNAME/PASSWORD <-> PHONE/OTP ==================== */
+  function setLoginMode(useMobileOtp) {
+    IS_MOBILE_OTP_MODE = !!useMobileOtp;
+    clearMainLoginError();
+
+    const userSec = document.getElementById("usernameLoginSection");
+    const otpBox = document.getElementById("mobileOtpBox");
+    const toggleBtn = document.getElementById("btnToggleMobileOtp");
+
+    if (IS_MOBILE_OTP_MODE) {
+      userSec.style.display = "none";
+      otpBox.classList.add("open");
+      toggleBtn.textContent = "Login with Username";
+      const mInp = document.getElementById("loginMobileInput");
+      if (mInp) mInp.focus();
+    } else {
+      otpBox.classList.remove("open");
+      userSec.style.display = "block";
+      toggleBtn.textContent = "Login with Phone Number";
+      const uInp = document.getElementById("portalUserId");
+      if (uInp) uInp.focus();
+    }
+  }
+
+  function toggleMobileOtpSection() {
+    setLoginMode(!IS_MOBILE_OTP_MODE);
+  }
+
+  /* ==================== PORTAL LOGIN ==================== */
+  async function handlePortalLogin(e) {
+    e.preventDefault();
+    clearMainLoginError();
+
+    const uid = document.getElementById("portalUserId").value.trim();
+    const pass = document.getElementById("portalPassword").value.trim();
+    const pageType = document.getElementById("loginPageType").value;
+    const btn = document.getElementById("btnPortalSignIn");
+
+    if (!uid || !pass) {
+      showMainLoginError("Please enter both User ID and Password.");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Signing In...";
+
+    try {
+      if (pageType === "Support") {
+        const localSupport = USERS_LIST.find(u =>
+          String(u.userId || "").trim().toLowerCase() === uid.toLowerCase() &&
+          String(u.password || "").trim() === pass &&
+          String(u.roleType || "").trim().toLowerCase() === "support"
+        );
+
+        if (localSupport) {
+          if (localSupport.isActive === false) {
+            showMainLoginError("This Support account is Inactive.");
+            return;
+          }
+          CURRENT_STAFF = {
+            userId: String(localSupport.userId).toUpperCase(),
+            password: pass,
+            groupAccess: localSupport.groupAccess || "All",
+            canCreateUser: localSupport.canCreateUser !== undefined ? !!localSupport.canCreateUser : true,
+            label: localSupport.employeeName || ""
+          };
+          saveSession4Days("admin", CURRENT_STAFF);
+          enterAdminView();
+          return;
+        }
+
+        if (uid.toLowerCase() === "admin" && pass === "admin@2026") {
+          CURRENT_STAFF = {
+            userId: "ADMIN",
+            password: pass,
+            groupAccess: "All",
+            canCreateUser: true,
+            label: "Super Admin"
+          };
+          saveSession4Days("admin", CURRENT_STAFF);
+          enterAdminView();
+          return;
+        }
+
+        try {
+          const resp = await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify({
+              action: "verifyStaffLogin",
+              userId: uid,
+              password: pass
+            })
+          });
+          const data = await resp.json();
+          if (data && data.status === "success") {
+            const u = data.user || {};
+            CURRENT_STAFF = {
+              userId: String(u.userId || uid).toUpperCase(),
+              password: pass,
+              groupAccess: u.groupAccess || "All",
+              canCreateUser: u.canCreateUser !== undefined ? !!u.canCreateUser : true,
+              label: u.label || ""
+            };
+            saveSession4Days("admin", CURRENT_STAFF);
+            enterAdminView();
+            return;
+          }
+        } catch (_) {}
+
+        showMainLoginError("Invalid Admin / Support ID or Password.");
+      } else {
+        const matchedLocal = USERS_LIST.find(u =>
+          String(u.userId || "").trim().toLowerCase() === uid.toLowerCase() &&
+          (!u.password || String(u.password).trim() === pass) &&
+          String(u.roleType || "User").trim().toLowerCase() === "user"
+        );
+
+        if (matchedLocal) {
+          if (matchedLocal.isActive === false) {
+            showMainLoginError("This User account is currently Inactive.");
+            return;
+          }
+          enterUserView({
+            role: "User",
+            label: String(matchedLocal.userId).toUpperCase(),
+            employeeName: matchedLocal.employeeName || "",
+            mobile: matchedLocal.mobile || "",
+            counters: normalizeCounterList(matchedLocal.counters)
+          });
+          return;
+        }
+
+        try {
+          const uResp = await fetch(SCRIPT_URL, {
+            method: "POST",
+            body: JSON.stringify({
+              action: "verifyUserLogin",
+              userId: uid,
+              password: pass,
+              role: "User"
+            })
+          });
+          const uData = await uResp.json();
+          if (uData && uData.status === "success" && uData.user) {
+            const uObj = uData.user;
+            if (String(uObj.active || "true").toLowerCase() === "false" || uObj.isActive === false) {
+              showMainLoginError("This User account is currently Inactive.");
+              return;
+            }
+            enterUserView({
+              role: "User",
+              label: String(uObj.userId || uid).toUpperCase(),
+              employeeName: uObj.employeeName || uObj.name || "",
+              mobile: uObj.mobile || uObj.phone || "",
+              counters: normalizeCounterList(uObj.counters || uObj.counter)
+            });
+            return;
+          }
+        } catch (_) {}
+
+        showMainLoginError("Invalid User ID or Password.");
+      }
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Sign In";
+    }
+  }
+
+  /* ==================== PHONE + OTP LOGIN ==================== */
+  async function handleMobileOtpContinue() {
+    clearMainLoginError();
+
+    const mobileEl = document.getElementById("loginMobileInput");
+    const otpEl = document.getElementById("loginOtpInput");
+    const digits = String(mobileEl ? mobileEl.value : "").replace(/\D/g, "");
+    const phone10 = digits.length >= 10 ? digits.slice(-10) : digits;
+    const otpVal = String(otpEl ? otpEl.value : "").trim();
+
+    if (phone10.length !== 10) {
+      showMainLoginError("Please enter a valid 10-digit phone number.");
+      if (mobileEl) mobileEl.focus();
+      return;
+    }
+
+    if (!otpVal) {
+      showMainLoginError("Please enter OTP.");
+      if (otpEl) otpEl.focus();
+      return;
+    }
+
+    const btn = document.getElementById("btnMobileOtpContinue");
+    btn.disabled = true;
+    btn.textContent = "Continuing...";
+
+    try {
+      const matchedUser = USERS_LIST.find(u =>
+        String(u.mobile || "").replace(/\D/g, "").slice(-10) === phone10
+      );
+      if (matchedUser && !matchedUser.isActive) {
+        showMainLoginError("User associated with this phone number is Inactive.");
+        return;
+      }
+
+      enterUserView({
+        role: "User",
+        label: matchedUser ? String(matchedUser.userId).toUpperCase() : ("Phone: " + phone10),
+        employeeName: matchedUser ? matchedUser.employeeName : "",
+        mobile: phone10,
+        counters: matchedUser ? normalizeCounterList(matchedUser.counters) : []
+      });
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Continue with Phone & OTP";
+    }
+  }
+
+  /* ==================== COUNTER AUTO-FILL OR DROPDOWN IN USER PORTAL ==================== */
+  function configureUserCounterAccess(counters, preferredCounter) {
+    const selEl = document.getElementById("userAssignedCounterSelect");
+    const comboWrap = document.getElementById("counterComboWrap");
+    const searchInp = document.getElementById("counterSearch");
+    const hiddenCounter = document.getElementById("counter");
+    const labelEl = document.getElementById("userCounterLabel");
+
+    const list = normalizeCounterList(counters);
+
+    if (list.length >= 2) {
+      labelEl.textContent = "Counter (Select Assigned Counter) *";
+      selEl.style.display = "block";
+      selEl.required = true;
+      comboWrap.style.display = "none";
+      searchInp.required = false;
+
+      selEl.innerHTML = '<option value="">-- Select Counter --</option>' +
+        list.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join("");
+      const prefIdx = preferredCounter
+        ? list.findIndex(c => c.toLowerCase() === String(preferredCounter).toLowerCase())
+        : -1;
+      selEl.selectedIndex = prefIdx >= 0 ? prefIdx + 1 : 1;
+      hiddenCounter.value = selEl.value || list[0];
+    } else if (list.length === 1) {
+      labelEl.textContent = "Counter (Auto-Filled) *";
+      selEl.style.display = "none";
+      selEl.required = false;
+      comboWrap.style.display = "block";
+      searchInp.required = true;
+
+      searchInp.value = list[0];
+      hiddenCounter.value = list[0];
+    } else {
+      labelEl.textContent = "Counter *";
+      selEl.style.display = "none";
+      selEl.required = false;
+      comboWrap.style.display = "block";
+      searchInp.required = true;
+      searchInp.value = preferredCounter || "";
+      hiddenCounter.value = preferredCounter || "";
+    }
+  }
+
+  function onAssignedCounterSelectChange() {
+    const selEl = document.getElementById("userAssignedCounterSelect");
+    document.getElementById("counter").value = selEl.value;
+    document.getElementById("counterSearch").value = selEl.value;
+    if (CURRENT_USER_SESSION) {
+      CURRENT_USER_SESSION.lastCounter = selEl.value;
+      saveSession4Days("user", CURRENT_USER_SESSION);
+    }
+  }
+
+  function enterUserView(sessionInfo, isRestore) {
+    CURRENT_USER_SESSION = sessionInfo || { role: "User", label: "User", employeeName: "", mobile: "", counters: [] };
+    if (!isRestore) {
+      saveSession4Days("user", CURRENT_USER_SESSION);
+    }
+
+    document.getElementById("loginScreenView").style.display = "none";
+    document.getElementById("adminPortalView").style.display = "none";
+    document.getElementById("userPortalView").style.display = "block";
+    document.getElementById("userBadgeText").textContent = CURRENT_USER_SESSION.label || "User";
+
+    const empInput = document.getElementById("empName");
+    const empLabel = document.getElementById("userEmpNameLabel");
+    const activeName = CURRENT_USER_SESSION.lastEmployeeName || CURRENT_USER_SESSION.employeeName || "";
+    if (activeName) {
+      empInput.value = activeName;
+      empLabel.textContent = CURRENT_USER_SESSION.employeeName ? "Employee Name (Auto-Filled) *" : "Employee Name *";
+    } else {
+      empLabel.textContent = "Employee Name *";
+    }
+
+    configureUserCounterAccess(CURRENT_USER_SESSION.counters || [], CURRENT_USER_SESSION.lastCounter || "");
+
+    const activeMobile = CURRENT_USER_SESSION.lastMobile || CURRENT_USER_SESSION.mobile || "";
+    if (activeMobile) {
+      document.getElementById("searchPhoneInput").value = activeMobile;
+      document.getElementById("whatsapp").value = activeMobile;
+      searchByMobileNumber();
+    }
+  }
+
+  function logoutToLoginScreen() {
+    CURRENT_STAFF = null;
+    CURRENT_USER_SESSION = null;
+    ALL_TICKETS = [];
+    clearSavedSession();
+    if (AUTO_SYNC_TIMER) {
+      clearInterval(AUTO_SYNC_TIMER);
+      AUTO_SYNC_TIMER = null;
+    }
+    document.getElementById("adminPortalView").style.display = "none";
+    document.getElementById("userPortalView").style.display = "none";
+    document.getElementById("loginScreenView").style.display = "grid";
+    document.getElementById("portalPassword").value = "";
+    document.getElementById("loginOtpInput").value = "";
+    setLoginMode(false);
+    clearMainLoginError();
   }
 
   /* ==================== USER COUNTER COMBOBOX ==================== */
@@ -1239,7 +2408,7 @@
     });
   }
 
-  /* ==================== ADMIN NEW TICKET COUNTER COMBOBOX ==================== */
+  /* ==================== PENDING NEW TICKET COUNTER COMBOBOX ==================== */
   function renderAdmCounterDropdown(items) {
     const listEl = document.getElementById("admCounterDropdown");
     ADM_FILTERED_COUNTERS = items;
@@ -1335,6 +2504,7 @@
       .then(data => {
         if (data && data.status === "success" && Array.isArray(data.counters)) {
           COUNTERS_LIST = data.counters;
+          renderModalCounterCheckboxes();
         }
       })
       .catch(() => {});
@@ -1381,7 +2551,7 @@
       .catch(() => {});
   }
 
-  /* ==================== MOBILE NUMBER SEARCH ==================== */
+  /* ==================== PHONE NUMBER SEARCH (ONLY PENDING TICKETS) ==================== */
   function searchByMobileNumber() {
     const inputEl = document.getElementById("searchPhoneInput");
     const btnEl = document.getElementById("btnSearchPhone");
@@ -1392,7 +2562,7 @@
 
     if (phone10.length !== 10) {
       resEl.style.display = "block";
-      resEl.innerHTML = '<div class="status-err">Please enter a valid 10-digit mobile number.</div>';
+      resEl.innerHTML = '<div class="status-err">Please enter a valid 10-digit phone number.</div>';
       if (inputEl) inputEl.focus();
       return;
     }
@@ -1400,25 +2570,27 @@
     btnEl.disabled = true;
     btnEl.textContent = "Checking...";
     resEl.style.display = "block";
-    resEl.innerHTML = `<div class="status-loading">Searching tickets for ${esc(phone10)}...</div>`;
+    resEl.innerHTML = `<div class="status-loading">Searching pending tickets for ${esc(phone10)}...</div>`;
 
     fetch(SCRIPT_URL + "?action=searchByPhone&phone=" + encodeURIComponent(phone10) + "&_t=" + Date.now())
       .then(r => r.json())
       .then(data => {
-        if (data && data.status === "success" && Array.isArray(data.tickets) && data.tickets.length > 0) {
-          resEl.innerHTML = data.tickets.map(t => {
+        const allFound = (data && data.status === "success" && Array.isArray(data.tickets)) ? data.tickets : [];
+        const pendingOnly = allFound.filter(t => String(t.ticketStatus || "Pending").trim().toLowerCase() !== "completed");
+
+        if (pendingOnly.length > 0) {
+          resEl.innerHTML = pendingOnly.map(t => {
             const st = esc(t.ticketStatus || "Pending");
-            const isDone = st.toLowerCase() === "completed";
             return `
               <div style="padding:10px 12px;border:1px solid #cbd5e1;border-radius:8px;margin-top:8px;background:#f8fafc;">
-                <div><strong>Ticket ID:</strong> ${esc(t.ticketId)} &nbsp;|&nbsp; <strong>Status:</strong> <span style="font-weight:700;color:${isDone ? '#15803d' : '#1d4ed8'};">${st}</span></div>
+                <div><strong>Ticket ID:</strong> ${esc(t.ticketId)} &nbsp;|&nbsp; <strong>Status:</strong> <span style="font-weight:700;color:#1d4ed8;">${st}</span></div>
                 <div style="margin-top:4px;font-size:13px;"><strong>Counter:</strong> ${esc(t.counter)} &nbsp;|&nbsp; <strong>Group:</strong> ${esc(t.group)} (${esc(t.category)})</div>
                 ${t.date ? `<div style="margin-top:2px;font-size:12.5px;color:#475569;"><strong>Date:</strong> ${esc(t.date)}</div>` : ""}
               </div>
             `;
           }).join("");
         } else {
-          resEl.innerHTML = `<div class="status-err">${esc((data && data.message) || "No tickets found.")}</div>`;
+          resEl.innerHTML = `<div class="status-err">No pending tickets found for phone number ${esc(phone10)}.</div>`;
         }
       })
       .catch(() => {
@@ -1433,7 +2605,7 @@
   /* ==================== SUBMIT REQUEST ==================== */
   function compressImageToBase64(file) {
     return new Promise((resolve) => {
-      if (!file) return resolve({ photoBase64: "", photoMime: "" });
+      if (!file) return resolve({ photoBase64: "", photoMime: "", photoDataUrl: "" });
       const reader = new FileReader();
       reader.onload = function(evt) {
         const img = new Image();
@@ -1449,18 +2621,44 @@
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           const dataUrl = canvas.toDataURL("image/jpeg", 0.78);
           const parts = dataUrl.split(",");
-          resolve({ photoBase64: parts[1] || "", photoMime: "image/jpeg" });
+          resolve({ photoBase64: parts[1] || "", photoMime: "image/jpeg", photoDataUrl: dataUrl });
         };
         img.onerror = function() {
           const raw = String(evt.target.result || "");
           const parts = raw.split(",");
-          resolve({ photoBase64: parts[1] || "", photoMime: file.type || "image/jpeg" });
+          resolve({ photoBase64: parts[1] || "", photoMime: file.type || "image/jpeg", photoDataUrl: raw });
         };
         img.src = evt.target.result;
       };
-      reader.onerror = function() { resolve({ photoBase64: "", photoMime: "" }); };
+      reader.onerror = function() { resolve({ photoBase64: "", photoMime: "", photoDataUrl: "" }); };
       reader.readAsDataURL(file);
     });
+  }
+
+  function getSelectedUserCounter() {
+    const selEl = document.getElementById("userAssignedCounterSelect");
+    if (selEl && selEl.style.display !== "none") {
+      return selEl.value.trim();
+    }
+    return (document.getElementById("counter").value.trim() || document.getElementById("counterSearch").value.trim());
+  }
+
+  function refillNextUserTicketDefaults(name, whatsapp, counter) {
+    document.getElementById("reqDate").value = formatTodayDateOnly();
+    document.getElementById("empName").value = name || "";
+    document.getElementById("whatsapp").value = whatsapp || "";
+    configureUserCounterAccess(
+      (CURRENT_USER_SESSION && CURRENT_USER_SESSION.counters) ? CURRENT_USER_SESSION.counters : [],
+      counter || ""
+    );
+    document.getElementById("categorySelect").innerHTML = '<option value="">-- Select Group First --</option>';
+
+    if (CURRENT_USER_SESSION) {
+      CURRENT_USER_SESSION.lastEmployeeName = name || "";
+      CURRENT_USER_SESSION.lastMobile = whatsapp || "";
+      CURRENT_USER_SESSION.lastCounter = counter || "";
+      saveSession4Days("user", CURRENT_USER_SESSION);
+    }
   }
 
   async function submitTicket(e) {
@@ -1475,7 +2673,7 @@
 
     const name = toTitleCaseFinal(empInput.value);
     const whatsapp = document.getElementById("whatsapp").value.replace(/\D/g, "");
-    const counter = document.getElementById("counter").value.trim() || document.getElementById("counterSearch").value.trim();
+    const counter = getSelectedUserCounter();
     const group = document.getElementById("groupSelect").value.trim();
     const category = document.getElementById("categorySelect").value.trim();
     const urgency = document.getElementById("urgency").value.trim() || "Medium";
@@ -1518,11 +2716,17 @@
       const result = await resp.json();
 
       if (result && result.status === "success") {
+        if (result.ticketId && photoData.photoDataUrl) {
+          savePhotoCache(result.ticketId, photoData.photoDataUrl);
+        }
         showFormBanner(`Request submitted successfully! Your Ticket ID is <strong>${esc(result.ticketId)}</strong>.`, false);
         document.getElementById("ticketForm").reset();
-        document.getElementById("reqDate").value = formatTodayDateOnly();
-        document.getElementById("counter").value = "";
-        document.getElementById("categorySelect").innerHTML = '<option value="">-- Select Group First --</option>';
+        refillNextUserTicketDefaults(name, whatsapp, counter);
+
+        if (whatsapp.length >= 10) {
+          document.getElementById("searchPhoneInput").value = whatsapp.slice(-10);
+          searchByMobileNumber();
+        }
       } else {
         showFormBanner(result && result.message ? result.message : "Failed to submit request.", true);
       }
@@ -1534,7 +2738,18 @@
     }
   }
 
-  /* ==================== ADMIN NEW TICKET SUBMIT ==================== */
+  /* ==================== INLINE NEW TICKET INSIDE PENDING SCREEN ==================== */
+  function toggleInlineNewTicket(forceOpen) {
+    const panel = document.getElementById("inlineNewTicketPanel");
+    const nextState = (typeof forceOpen === "boolean") ? forceOpen : !panel.classList.contains("open");
+    panel.classList.toggle("open", nextState);
+    if (nextState) {
+      document.getElementById("admReqDate").value = formatTodayDateOnly();
+      const empInp = document.getElementById("admEmpName");
+      if (empInp) empInp.focus();
+    }
+  }
+
   async function submitAdminNewTicket(e) {
     e.preventDefault();
 
@@ -1594,6 +2809,9 @@
 
       msgEl.style.display = "block";
       if (result && result.status === "success") {
+        if (result.ticketId && photoData.photoDataUrl) {
+          savePhotoCache(result.ticketId, photoData.photoDataUrl);
+        }
         msgEl.className = "msg ok";
         msgEl.innerHTML = `New ticket created successfully! Ticket ID: <strong>${esc(result.ticketId)}</strong>.`;
         document.getElementById("adminTicketForm").reset();
@@ -1615,87 +2833,42 @@
     }
   }
 
-  /* ==================== STAFF LOGIN & ADMIN SCREENS ==================== */
-  function openStaffLoginModal() {
-    document.getElementById("loginErrorMsg").style.display = "none";
-    document.getElementById("loginUserId").value = "";
-    document.getElementById("loginPassword").value = "";
-    document.getElementById("staffLoginModal").classList.add("open");
-    setTimeout(() => document.getElementById("loginUserId").focus(), 50);
-  }
+  /* ==================== ADMIN SCREENS ==================== */
+  function enterAdminView(isRestore) {
+    if (!CURRENT_STAFF) return;
+    if (!isRestore) {
+      saveSession4Days("admin", CURRENT_STAFF);
+    }
 
-  function closeStaffLoginModal() {
-    document.getElementById("staffLoginModal").classList.remove("open");
-  }
-
-  function submitStaffLogin(e) {
-    e.preventDefault();
-    const uid = document.getElementById("loginUserId").value.trim();
-    const pass = document.getElementById("loginPassword").value.trim();
-    const btn = document.getElementById("btnLoginSubmit");
-    const errEl = document.getElementById("loginErrorMsg");
-
-    btn.disabled = true;
-    btn.textContent = "Logging in...";
-    errEl.style.display = "none";
-
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "verifyStaffLogin",
-        userId: uid,
-        password: pass
-      })
-    })
-      .then(r => r.json())
-      .then(data => {
-        if (data && data.status === "success" && data.user) {
-          CURRENT_STAFF = {
-            userId: data.user.userId,
-            password: pass,
-            groupAccess: data.user.groupAccess || "All",
-            canCreateUser: !!data.user.canCreateUser,
-            label: data.user.label || ""
-          };
-          closeStaffLoginModal();
-          enterAdminView();
-        } else {
-          errEl.textContent = (data && data.message) || "Invalid credentials.";
-          errEl.style.display = "block";
-        }
-      })
-      .catch(() => {
-        errEl.textContent = "Network error while logging in.";
-        errEl.style.display = "block";
-      })
-      .finally(() => {
-        btn.disabled = false;
-        btn.textContent = "Login";
-      });
-  }
-
-  function enterAdminView() {
+    document.getElementById("loginScreenView").style.display = "none";
     document.getElementById("userPortalView").style.display = "none";
     document.getElementById("adminPortalView").style.display = "flex";
 
     document.getElementById("staffBadgeText").textContent = CURRENT_STAFF.userId;
-    document.getElementById("sideBtnCreateUser").style.display = CURRENT_STAFF.canCreateUser ? "flex" : "none";
+    document.getElementById("sideBtnUsers").style.display = CURRENT_STAFF.canCreateUser ? "flex" : "none";
     document.getElementById("admReqDate").value = formatTodayDateOnly();
 
     const grpSel = document.getElementById("filterGroup");
+    const compGrpSel = document.getElementById("compFilterGroup");
     if (CURRENT_STAFF.groupAccess !== "All") {
       grpSel.value = CURRENT_STAFF.groupAccess;
       grpSel.disabled = true;
+      compGrpSel.value = CURRENT_STAFF.groupAccess;
+      compGrpSel.disabled = true;
       ACTIVE_PENDING_GROUP = CURRENT_STAFF.groupAccess;
     } else {
       grpSel.disabled = false;
       grpSel.value = "";
+      compGrpSel.disabled = false;
       ACTIVE_PENDING_GROUP = "All";
     }
 
     syncPendingGroupTabButtons();
     switchAdminScreen("dashboard");
     loadAdminTickets();
+    if (CURRENT_STAFF.canCreateUser) {
+      loadUsersList();
+    }
 
     if (AUTO_SYNC_TIMER) clearInterval(AUTO_SYNC_TIMER);
     AUTO_SYNC_TIMER = setInterval(() => {
@@ -1703,36 +2876,29 @@
     }, 30000);
   }
 
-  function logoutStaff() {
-    CURRENT_STAFF = null;
-    ALL_TICKETS = [];
-    if (AUTO_SYNC_TIMER) {
-      clearInterval(AUTO_SYNC_TIMER);
-      AUTO_SYNC_TIMER = null;
-    }
-    document.getElementById("adminPortalView").style.display = "none";
-    document.getElementById("userPortalView").style.display = "block";
-  }
-
   function switchAdminScreen(screenName) {
-    if (screenName === "createUser" && (!CURRENT_STAFF || !CURRENT_STAFF.canCreateUser)) {
+    if (screenName === "users" && (!CURRENT_STAFF || !CURRENT_STAFF.canCreateUser)) {
       screenName = "dashboard";
     }
 
     document.getElementById("screenDashboard").style.display = screenName === "dashboard" ? "block" : "none";
     document.getElementById("screenPending").style.display = screenName === "pending" ? "block" : "none";
-    document.getElementById("screenNewTicket").style.display = screenName === "newTicket" ? "block" : "none";
-    document.getElementById("screenCreateUser").style.display = screenName === "createUser" ? "block" : "none";
+    document.getElementById("screenCompleted").style.display = screenName === "completed" ? "block" : "none";
+    document.getElementById("screenUsers").style.display = screenName === "users" ? "block" : "none";
 
     document.getElementById("sideBtnDashboard").classList.toggle("active", screenName === "dashboard");
     document.getElementById("sideBtnPending").classList.toggle("active", screenName === "pending");
-    document.getElementById("sideBtnNewTicket").classList.toggle("active", screenName === "newTicket");
-    document.getElementById("sideBtnCreateUser").classList.toggle("active", screenName === "createUser");
+    document.getElementById("sideBtnCompleted").classList.toggle("active", screenName === "completed");
+    document.getElementById("sideBtnUsers").classList.toggle("active", screenName === "users");
 
     if (screenName === "pending") {
       renderPendingTickets();
-    } else if (screenName === "newTicket") {
-      document.getElementById("admReqDate").value = formatTodayDateOnly();
+    } else if (screenName === "completed") {
+      populateCompletedDateFilter();
+      renderCompletedTickets();
+    } else if (screenName === "users") {
+      renderUsersTable();
+      loadUsersList();
     }
   }
 
@@ -1765,10 +2931,17 @@
       .then(r => r.json())
       .then(data => {
         if (data && data.status === "success" && Array.isArray(data.tickets)) {
-          ALL_TICKETS = data.tickets;
+          ALL_TICKETS = data.tickets.map(t => {
+            if (t && t.ticketId && (t.photoDataUrl || t.photoUrl)) {
+              savePhotoCache(t.ticketId, t.photoDataUrl || t.photoUrl);
+            }
+            return t;
+          });
           populateAdminFilters(ALL_TICKETS);
           applyDashboardFilters();
           renderPendingTickets();
+          populateCompletedDateFilter();
+          renderCompletedTickets();
         } else {
           showAdminBanner((data && data.message) || "Failed to load tickets.", true);
         }
@@ -1846,6 +3019,60 @@
     applyDashboardFilters();
   }
 
+  function renderDashboardGraph(tickets) {
+    const groups = [
+      { key: "networking", label: "Networking" },
+      { key: "hardware", label: "Hardware" },
+      { key: "software", label: "Software" }
+    ];
+
+    const stats = {};
+    groups.forEach(g => { stats[g.key] = { pending: 0, completed: 0, total: 0 }; });
+
+    tickets.forEach(t => {
+      const grp = String(t.group || "").trim().toLowerCase();
+      if (!stats[grp]) return;
+      const isDone = String(t.status || "Pending").trim().toLowerCase() === "completed";
+      stats[grp].total++;
+      if (isDone) stats[grp].completed++;
+      else stats[grp].pending++;
+    });
+
+    let maxVal = 1;
+    groups.forEach(g => {
+      const s = stats[g.key];
+      maxVal = Math.max(maxVal, s.pending, s.completed, s.total);
+    });
+
+    const chartEl = document.getElementById("dashboardGraphChart");
+    chartEl.innerHTML = groups.map(g => {
+      const s = stats[g.key];
+      const hPend = Math.max(4, Math.round((s.pending / maxVal) * 125));
+      const hComp = Math.max(4, Math.round((s.completed / maxVal) * 125));
+      const hTot = Math.max(4, Math.round((s.total / maxVal) * 125));
+
+      return `
+        <div class="chart-col-group">
+          <div class="chart-bars-pair">
+            <div class="v-bar-wrap" title="Pending: ${s.pending}">
+              <span class="v-bar-val">${s.pending}</span>
+              <div class="v-bar" style="height:${hPend}px;background:#f59e0b;"></div>
+            </div>
+            <div class="v-bar-wrap" title="Completed: ${s.completed}">
+              <span class="v-bar-val">${s.completed}</span>
+              <div class="v-bar" style="height:${hComp}px;background:#16a34a;"></div>
+            </div>
+            <div class="v-bar-wrap" title="Total: ${s.total}">
+              <span class="v-bar-val">${s.total}</span>
+              <div class="v-bar" style="height:${hTot}px;background:#2563eb;"></div>
+            </div>
+          </div>
+          <div class="chart-col-title">${esc(g.label)}</div>
+        </div>
+      `;
+    }).join("");
+  }
+
   function renderDashboard(tickets, selectedMonth) {
     const total = tickets.length;
     let pending = 0, completed = 0, net = 0, hw = 0, sw = 0;
@@ -1886,6 +3113,8 @@
     document.getElementById("barHw").style.width = Math.round((hw / maxGrp) * 100) + "%";
     document.getElementById("barSw").style.width = Math.round((sw / maxGrp) * 100) + "%";
 
+    renderDashboardGraph(tickets);
+
     const teamEntries = Object.entries(memberMap).sort((a, b) => b[1] - a[1]);
     document.getElementById("teamTableBody").innerHTML = teamEntries.length === 0
       ? '<tr><td colspan="2" class="empty-state">No completed tickets in this view</td></tr>'
@@ -1903,31 +3132,9 @@
             <td style="text-align:right;color:#15803d;font-weight:600;">${st.completed}</td>
           </tr>
         `).join("");
-
-    document.getElementById("recordsCountLabel").textContent = total;
-    document.getElementById("requestsTableBody").innerHTML = tickets.length === 0
-      ? '<tr><td colspan="10" class="empty-state">No matching requests found</td></tr>'
-      : tickets.map(t => {
-          const st = String(t.status || "Pending").trim();
-          const isDone = st.toLowerCase() === "completed";
-          return `
-            <tr>
-              <td><strong>${esc(t.ticketId)}</strong></td>
-              <td style="white-space:nowrap;">${esc(t.date)}</td>
-              <td><strong>${esc(t.counter)}</strong></td>
-              <td>${esc(t.cluster || "-")}</td>
-              <td>${esc(t.employeeName)}</td>
-              <td style="white-space:nowrap;">${esc(t.whatsapp || "-")}</td>
-              <td><strong>${esc(t.group)}</strong><br><span style="font-size:11.5px;color:#64748b;">${esc(t.category)}</span></td>
-              <td style="max-width:220px;">${esc(t.issue)}</td>
-              <td><span class="badge ${isDone ? 'badge-done' : 'badge-pending'}">${esc(st)}</span></td>
-              <td>${esc(t.completedBy || "-")}</td>
-            </tr>
-          `;
-        }).join("");
   }
 
-  /* ==================== PENDING TICKETS SCREEN ==================== */
+  /* ==================== PENDING TICKETS & WHATSAPP MESSAGE ==================== */
   function syncPendingGroupTabButtons() {
     const buttons = document.querySelectorAll("#pendingGroupTabs .grp-pill");
     buttons.forEach(btn => {
@@ -1947,11 +3154,25 @@
     renderPendingTickets();
   }
 
+  function buildWhatsAppMessage(t) {
+    const emp = String(t.employeeName || "").trim();
+    return `Hello Mr.${emp} " Your It_Service_Request " has been Completed Thank You for contacting us`;
+  }
+
   function buildWhatsAppUrl(t) {
     const digits = String(t.whatsapp || "").replace(/\D/g, "");
     const phone = digits.length === 10 ? ("91" + digits) : digits;
-    const msg = `✅ Your IT_Service_Request Has Been Completed.\nTicket ID: ${t.ticketId}\nCounter: ${t.counter}\nGroup: ${t.group} (${t.category})`;
+    const msg = buildWhatsAppMessage(t);
     return phone ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}` : "";
+  }
+
+  function sendWhatsAppForTicket(ticketId, waUrl) {
+    if (!waUrl) return;
+    WA_SENT_MAP[ticketId] = true;
+    saveWaSentMap();
+    window.open(waUrl, "_blank", "noopener");
+    renderPendingTickets();
+    renderCompletedTickets();
   }
 
   function renderPendingTickets() {
@@ -1994,9 +3215,12 @@
       return;
     }
 
-    grid.innerHTML = list.map((t, idx) => {
+    grid.innerHTML = list.map((t) => {
       const waUrl = buildWhatsAppUrl(t);
+      const alreadySent = !!WA_SENT_MAP[t.ticketId];
       const urg = esc(t.urgency || "Medium");
+      const photoSrc = resolveTicketPhotoSrc(t);
+      const displayIssue = formatDescriptionFinal(t.issue);
       return `
         <div class="ticket-card">
           <div class="ticket-top">
@@ -2009,25 +3233,200 @@
             <strong>Employee:</strong> ${esc(t.employeeName)} (${esc(t.whatsapp || "-")})<br>
             <strong>Group:</strong> ${esc(t.group)} — ${esc(t.category)}
           </div>
-          <div class="ticket-issue">${esc(t.issue)}</div>
+          <div class="ticket-issue">${esc(displayIssue)}</div>
           <div class="ticket-actions">
-            ${t.photoDataUrl ? `<button type="button" class="btn-sm btn-photo" onclick="openPhotoModalByIndex(${idx})">📷 Photo</button>` : ""}
+            ${photoSrc ? `<button type="button" class="btn-sm btn-photo" onclick="openPhotoModalBySrc('${esc(t.ticketId)}', '${esc(photoSrc)}')">📷 Photo</button>` : ""}
             <button type="button" class="btn-sm btn-complete" onclick="openCompleteModal('${esc(t.ticketId)}')">✔ Complete</button>
-            ${waUrl ? `<a class="btn-sm btn-wa" href="${waUrl}" target="_blank" rel="noopener">WhatsApp</a>` : ""}
+            ${(waUrl && !alreadySent) ? `<button type="button" class="btn-sm btn-wa" onclick="sendWhatsAppForTicket('${esc(t.ticketId)}', '${esc(waUrl)}')">WhatsApp</button>` : ""}
           </div>
         </div>
       `;
     }).join("");
-
-    window.__CURRENT_PENDING_LIST = list;
   }
 
-  function openPhotoModalByIndex(idx) {
-    const list = window.__CURRENT_PENDING_LIST || [];
-    const t = list[idx];
-    if (!t || !t.photoDataUrl) return;
-    document.getElementById("photoModalTitle").textContent = t.ticketId;
-    document.getElementById("photoModalImg").src = t.photoDataUrl;
+  /* ==================== COMPLETE TICKETS SCREEN (ALL COLUMNS GRID TABLE + FILTERS + SEARCH + EXPORT) ==================== */
+  function populateCompletedDateFilter() {
+    const sel = document.getElementById("compFilterDate");
+    if (!sel) return;
+    const prev = sel.value;
+    const completedList = getRoleScopedTickets().filter(t =>
+      String(t.status || "").trim().toLowerCase() === "completed"
+    );
+    const dates = [], seen = {};
+    completedList.forEach(t => {
+      const d = resolveTicketCompletedDate(t);
+      if (d && !seen[d]) { seen[d] = true; dates.push(d); }
+    });
+    sel.innerHTML = '<option value="">All Completed Dates</option>' +
+      dates.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join("");
+    if (prev && Array.from(sel.options).some(o => o.value === prev)) {
+      sel.value = prev;
+    }
+  }
+
+  function resetCompletedFilters() {
+    document.getElementById("compSearchInput").value = "";
+    if (CURRENT_STAFF && CURRENT_STAFF.groupAccess === "All") {
+      document.getElementById("compFilterGroup").value = "";
+    }
+    document.getElementById("compFilterZone").value = "";
+    document.getElementById("compFilterDate").value = "";
+    renderCompletedTickets();
+  }
+
+  function renderCompletedTickets() {
+    const completedAll = getRoleScopedTickets().filter(t =>
+      String(t.status || "").trim().toLowerCase() === "completed"
+    );
+
+    const searchQ = String(document.getElementById("compSearchInput").value || "").trim().toLowerCase();
+    const fGroup = (CURRENT_STAFF && CURRENT_STAFF.groupAccess !== "All")
+      ? CURRENT_STAFF.groupAccess.toLowerCase()
+      : String(document.getElementById("compFilterGroup").value || "").trim().toLowerCase();
+    const fZone = normalizeZoneValue(document.getElementById("compFilterZone").value);
+    const fCompDate = String(document.getElementById("compFilterDate").value || "").trim();
+
+    const filtered = completedAll.filter(t => {
+      if (fGroup && String(t.group || "").trim().toLowerCase() !== fGroup) return false;
+      if (fZone && normalizeZoneValue(t.zone) !== fZone) return false;
+      const compDateStr = resolveTicketCompletedDate(t);
+      if (fCompDate && compDateStr !== fCompDate) return false;
+
+      if (searchQ) {
+        const hay = [
+          t.ticketId,
+          t.counter,
+          t.employeeName,
+          t.whatsapp,
+          t.group,
+          t.category,
+          t.zone,
+          t.division,
+          t.cluster,
+          t.completedBy,
+          t.issue
+        ].join(" ").toLowerCase();
+        if (!hay.includes(searchQ)) return false;
+      }
+      return true;
+    });
+
+    FILTERED_COMPLETED_TICKETS = filtered;
+    document.getElementById("completedCountLabel").textContent = filtered.length;
+
+    const tbody = document.getElementById("completedTicketsTableBody");
+    if (!tbody) return;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="17" class="empty-state">No matching completed tickets found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(t => {
+      const waUrl = buildWhatsAppUrl(t);
+      const alreadySent = !!WA_SENT_MAP[t.ticketId];
+      const photoSrc = resolveTicketPhotoSrc(t);
+      const completedDateStr = resolveTicketCompletedDate(t);
+      const displayIssue = formatDescriptionFinal(t.issue);
+      const displayRemarks = formatDescriptionFinal(t.remarks);
+
+      return `
+        <tr>
+          <td><strong>${esc(t.ticketId)}</strong></td>
+          <td style="white-space:nowrap;">${esc(t.date || "-")}</td>
+          <td style="white-space:nowrap;font-weight:700;color:#15803d;">${esc(completedDateStr || "-")}</td>
+          <td>${esc(t.zone || "-")}</td>
+          <td>${esc(t.division || "-")}</td>
+          <td>${esc(t.cluster || "-")}</td>
+          <td><strong>${esc(t.counter || "-")}</strong></td>
+          <td>${esc(t.employeeName || "-")}</td>
+          <td style="white-space:nowrap;">${esc(t.whatsapp || "-")}</td>
+          <td>${esc(t.group || "-")}</td>
+          <td>${esc(t.category || "-")}</td>
+          <td>${esc(displayIssue || "-")}</td>
+          <td>${esc(t.urgency || "Medium")}</td>
+          <td>${esc(t.completedBy || "-")}</td>
+          <td>${esc(displayRemarks || "-")}</td>
+          <td>
+            ${photoSrc
+              ? `<button type="button" class="btn-sm btn-photo" onclick="openPhotoModalBySrc('${esc(t.ticketId)}', '${esc(photoSrc)}')">📷 View</button>`
+              : `<span style="color:#94a3b8;">-</span>`
+            }
+          </td>
+          <td>
+            ${(waUrl && !alreadySent)
+              ? `<button type="button" class="btn-sm btn-wa" onclick="sendWhatsAppForTicket('${esc(t.ticketId)}', '${esc(waUrl)}')">WhatsApp</button>`
+              : `<span style="color:#64748b;font-size:11.5px;">${alreadySent ? "Sent" : "-"}</span>`
+            }
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  function exportCompletedTicketsCsv() {
+    if (!FILTERED_COMPLETED_TICKETS.length) {
+      showAdminBanner("No completed tickets available to export.", true, 3000);
+      return;
+    }
+
+    const headers = [
+      "Ticket ID",
+      "Date",
+      "Completed Date",
+      "Zone",
+      "Division",
+      "Cluster",
+      "Counter",
+      "Employee Name",
+      "Phone Number",
+      "IT Group",
+      "Category",
+      "Issue Description",
+      "Urgency",
+      "Status",
+      "Completed By",
+      "Remarks"
+    ];
+
+    const rows = FILTERED_COMPLETED_TICKETS.map(t => [
+      t.ticketId || "",
+      t.date || "",
+      resolveTicketCompletedDate(t),
+      t.zone || "",
+      t.division || "",
+      t.cluster || "",
+      t.counter || "",
+      t.employeeName || "",
+      t.whatsapp || "",
+      t.group || "",
+      t.category || "",
+      formatDescriptionFinal(t.issue),
+      t.urgency || "Medium",
+      t.status || "Completed",
+      t.completedBy || "",
+      formatDescriptionFinal(t.remarks)
+    ]);
+
+    const csvContent = [headers, ...rows]
+      .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "wheelsmart_completed_tickets.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function openPhotoModalBySrc(ticketId, src) {
+    if (!src) return;
+    document.getElementById("photoModalTitle").textContent = ticketId || "";
+    document.getElementById("photoModalImg").src = src;
     document.getElementById("photoModal").classList.add("open");
   }
 
@@ -2052,8 +3451,10 @@
   function confirmCompleteTicket() {
     const completedBy = toTitleCaseFinal(document.getElementById("completedByInput").value);
     const remarks = formatDescriptionFinal(document.getElementById("remarksInput").value);
+    const completedDate = formatTodayDateOnly();
     if (!COMPLETION_TARGET_TICKET || !completedBy) return;
 
+    const targetId = COMPLETION_TARGET_TICKET;
     const btn = document.getElementById("btnConfirmComplete");
     btn.disabled = true;
     btn.textContent = "Saving...";
@@ -2062,16 +3463,18 @@
       method: "POST",
       body: JSON.stringify({
         action: "completeTicket",
-        ticketId: COMPLETION_TARGET_TICKET,
+        ticketId: targetId,
         completedBy: completedBy,
+        completedDate: completedDate,
         remarks: remarks
       })
     })
       .then(r => r.json())
       .then(res => {
         if (res && res.status === "success") {
+          saveCompletedMeta(res.ticketId || targetId, completedDate, completedBy);
           closeCompleteModal();
-          showAdminBanner(`Ticket <strong>${esc(res.ticketId)}</strong> marked as Completed.`, false, 3500);
+          showAdminBanner(`Ticket <strong>${esc(res.ticketId)}</strong> marked as Completed (${esc(completedDate)}).`, false, 3500);
           loadAdminTickets();
         } else {
           showAdminBanner((res && res.message) || "Failed to complete ticket.", true, 4000);
@@ -2084,59 +3487,502 @@
       });
   }
 
-  /* ==================== CREATE USER ID SCREEN ==================== */
-  function handleCreateStaffUser(e) {
+  /* ==================== USERS SCREEN ==================== */
+  function showUsersScreenMsg(text, isErr) {
+    const el = document.getElementById("usersScreenMsg");
+    el.className = "msg " + (isErr ? "err" : "ok");
+    el.innerHTML = text;
+    el.style.display = "block";
+    setTimeout(() => { el.style.display = "none"; }, 4000);
+  }
+
+  function normalizeUserObj(u) {
+    return {
+      userId: String(u.userId || "").trim().toUpperCase(),
+      password: String(u.password || "").trim(),
+      employeeName: String(u.employeeName || u.name || "").trim(),
+      mobile: String(u.mobile || u.phone || "").trim(),
+      counters: normalizeCounterList(u.counters || u.counter),
+      roleType: String(u.roleType || u.role || "User").trim(),
+      groupAccess: String(u.groupAccess || "All").trim(),
+      canCreateUser: !!u.canCreateUser,
+      isActive: (String(u.isActive !== undefined ? u.isActive : (u.active !== undefined ? u.active : true)).toLowerCase() !== "false")
+    };
+  }
+
+  async function loadUsersList() {
+    try {
+      const resp = await fetch(SCRIPT_URL + "?action=getUsers&_t=" + Date.now());
+      const data = await resp.json();
+      if (data && data.status === "success" && Array.isArray(data.users)) {
+        const sheetUsers = data.users.map(normalizeUserObj).filter(u => u.userId);
+        const mapById = new Map();
+        USERS_LIST.forEach(u => {
+          const norm = normalizeUserObj(u);
+          if (norm.userId) mapById.set(norm.userId, norm);
+        });
+        sheetUsers.forEach(u => {
+          const prev = mapById.get(u.userId);
+          mapById.set(u.userId, {
+            ...u,
+            password: u.password || (prev ? prev.password : "")
+          });
+        });
+        USERS_LIST = Array.from(mapById.values());
+        saveCachedUsers();
+        renderUsersTable();
+      }
+    } catch (_) {
+      renderUsersTable();
+    }
+  }
+
+  function renderUsersTable() {
+    const q = String(document.getElementById("usersSearchInput").value || "").trim().toLowerCase();
+    const filtered = USERS_LIST.filter(u => {
+      if (!q) return true;
+      const counterStr = normalizeCounterList(u.counters).join(", ").toLowerCase();
+      return (
+        String(u.userId || "").toLowerCase().includes(q) ||
+        String(u.employeeName || "").toLowerCase().includes(q) ||
+        String(u.mobile || "").toLowerCase().includes(q) ||
+        counterStr.includes(q) ||
+        String(u.roleType || "").toLowerCase().includes(q) ||
+        (normalizeCounterList(u.counters).length >= 2 && "multi counters".includes(q))
+      );
+    });
+
+    document.getElementById("usersCountLabel").textContent = filtered.length;
+    const tbody = document.getElementById("usersTableBody");
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No users found. Click "+ Create User" or "Import".</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(u => {
+      const realIdx = USERS_LIST.indexOf(u);
+      const countersArr = normalizeCounterList(u.counters);
+      let counterCellHtml = "-";
+      if (countersArr.length >= 2) {
+        counterCellHtml = `<span class="badge badge-multi">Multi Counters</span>`;
+      } else if (countersArr.length === 1) {
+        counterCellHtml = esc(countersArr[0]);
+      }
+
+      const isSup = String(u.roleType || "User").toLowerCase() === "support";
+      const roleBadge = isSup
+        ? `<span class="badge badge-support">Support</span>`
+        : `<span class="badge badge-user">User</span>`;
+
+      return `
+        <tr>
+          <td><strong>${esc(u.userId)}</strong></td>
+          <td>${esc(u.employeeName || "-")}</td>
+          <td style="white-space:nowrap;">${esc(u.mobile || "-")}</td>
+          <td>${counterCellHtml}</td>
+          <td>${roleBadge}</td>
+          <td>
+            <div class="status-action-cell">
+              <label class="status-switch" title="Toggle Active / Inactive">
+                <input type="checkbox" ${u.isActive ? "checked" : ""} onchange="toggleUserActiveStatus(${realIdx}, this.checked)" />
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label-text" style="color:${u.isActive ? '#1d4ed8' : '#64748b'};">${u.isActive ? "Active" : "Inactive"}</span>
+              </label>
+              <button type="button" class="btn-row-icon" title="View User" onclick="openViewUserModal(${realIdx})">👁 View</button>
+              <button type="button" class="btn-row-icon" title="Edit User" onclick="openEditUserModal(${realIdx})">✏️ Edit</button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  async function syncSingleUserToSheet(userRecord) {
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "createStaffUser",
+          callerUserId: CURRENT_STAFF ? CURRENT_STAFF.userId : "ADMIN",
+          callerPassword: CURRENT_STAFF ? CURRENT_STAFF.password : "",
+          newUserId: userRecord.userId,
+          newPassword: userRecord.password,
+          employeeName: userRecord.employeeName,
+          mobile: userRecord.mobile,
+          counters: userRecord.counters,
+          counter: normalizeCounterList(userRecord.counters).join(", "),
+          roleType: userRecord.roleType,
+          groupAccess: userRecord.groupAccess,
+          allowUserCreation: userRecord.canCreateUser,
+          isActive: userRecord.isActive
+        })
+      });
+    } catch (_) {}
+  }
+
+  async function toggleUserActiveStatus(idx, nextActive) {
+    const user = USERS_LIST[idx];
+    if (!user) return;
+    user.isActive = !!nextActive;
+    saveCachedUsers();
+    renderUsersTable();
+
+    await syncSingleUserToSheet(user);
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "updateUserStatus",
+          callerUserId: CURRENT_STAFF ? CURRENT_STAFF.userId : "",
+          userId: user.userId,
+          isActive: user.isActive
+        })
+      });
+    } catch (_) {}
+  }
+
+  function openViewUserModal(idx) {
+    const u = USERS_LIST[idx];
+    if (!u) return;
+    const countersArr = normalizeCounterList(u.counters);
+    const countersHtml = countersArr.length
+      ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">${countersArr.map(c => `<span class="sel-pill">${esc(c)}</span>`).join("")}</div>`
+      : "<span>-</span>";
+
+    document.getElementById("viewUserContent").innerHTML = `
+      <div><strong>User ID:</strong> ${esc(u.userId)}</div>
+      <div><strong>Employee Name:</strong> ${esc(u.employeeName || "-")}</div>
+      <div><strong>Phone Number:</strong> ${esc(u.mobile || "-")}</div>
+      <div><strong>Role:</strong> ${esc(u.roleType || "User")}</div>
+      <div><strong>Status:</strong> ${u.isActive ? "Active" : "Inactive"}</div>
+      <div style="margin-top:8px;"><strong>Assigned Counters (${countersArr.length}):</strong>${countersHtml}</div>
+    `;
+    document.getElementById("btnViewModalEdit").onclick = function() {
+      closeViewUserModal();
+      openEditUserModal(idx);
+    };
+    document.getElementById("viewUserModal").classList.add("open");
+  }
+
+  function closeViewUserModal() {
+    document.getElementById("viewUserModal").classList.remove("open");
+  }
+
+  function openCreateUserModal() {
+    EDITING_USER_INDEX = -1;
+    document.getElementById("userModalTitle").textContent = "Create User";
+    document.getElementById("btnCreateUser").textContent = "Save User";
+    document.getElementById("createUserForm").reset();
+    document.getElementById("createUserMsg").style.display = "none";
+    document.getElementById("modalCounterFilter").value = "";
+    document.getElementById("selectAllCountersCheckbox").checked = false;
+    document.getElementById("allowUserCreationCheckbox").checked = true;
+    SELECTED_NEW_USER_COUNTERS = [];
+    onNewUserRoleChange();
+    renderModalCounterCheckboxes();
+    renderSelectedCountersPreview();
+    document.getElementById("createUserModal").classList.add("open");
+  }
+
+  function openEditUserModal(idx) {
+    const u = USERS_LIST[idx];
+    if (!u) return;
+    EDITING_USER_INDEX = idx;
+    document.getElementById("userModalTitle").textContent = "Edit User — " + u.userId;
+    document.getElementById("btnCreateUser").textContent = "Update User";
+    document.getElementById("createUserMsg").style.display = "none";
+    document.getElementById("modalCounterFilter").value = "";
+
+    document.getElementById("newUserId").value = String(u.userId || "").toUpperCase();
+    document.getElementById("newUserPassword").value = u.password || "1234";
+    document.getElementById("newEmpName").value = u.employeeName || "";
+    document.getElementById("newMobileNumber").value = u.mobile || "";
+    document.getElementById("newUserRoleType").value = u.roleType || "User";
+    document.getElementById("newUserGroup").value = u.groupAccess || "All";
+    document.getElementById("allowUserCreationCheckbox").checked = !!u.canCreateUser;
+
+    SELECTED_NEW_USER_COUNTERS = normalizeCounterList(u.counters);
+    onNewUserRoleChange();
+    renderModalCounterCheckboxes();
+    syncSelectAllCheckboxState();
+    renderSelectedCountersPreview();
+    document.getElementById("createUserModal").classList.add("open");
+  }
+
+  function closeCreateUserModal() {
+    EDITING_USER_INDEX = -1;
+    document.getElementById("createUserModal").classList.remove("open");
+  }
+
+  function onNewUserRoleChange() {
+    const roleVal = document.getElementById("newUserRoleType").value;
+    const isSup = roleVal === "Support";
+    document.getElementById("supportGroupField").style.display = isSup ? "block" : "none";
+    document.getElementById("supportCreatePermRow").style.display = isSup ? "flex" : "none";
+  }
+
+  function toggleSelectAllCounters(checked) {
+    const filterQ = String(document.getElementById("modalCounterFilter").value || "").trim().toLowerCase();
+    const targetItems = filterQ
+      ? COUNTERS_LIST.filter(c => String(c).toLowerCase().includes(filterQ))
+      : COUNTERS_LIST;
+
+    if (checked) {
+      targetItems.forEach(c => {
+        const clean = String(c || "").trim();
+        if (clean && !SELECTED_NEW_USER_COUNTERS.includes(clean)) {
+          SELECTED_NEW_USER_COUNTERS.push(clean);
+        }
+      });
+    } else {
+      const targetSet = new Set(targetItems.map(c => String(c || "").trim()));
+      SELECTED_NEW_USER_COUNTERS = SELECTED_NEW_USER_COUNTERS.filter(c => !targetSet.has(c));
+    }
+
+    renderModalCounterCheckboxes();
+    renderSelectedCountersPreview();
+  }
+
+  function syncSelectAllCheckboxState() {
+    const selAllEl = document.getElementById("selectAllCountersCheckbox");
+    if (!selAllEl) return;
+    const filterQ = String(document.getElementById("modalCounterFilter").value || "").trim().toLowerCase();
+    const targetItems = filterQ
+      ? COUNTERS_LIST.filter(c => String(c).toLowerCase().includes(filterQ))
+      : COUNTERS_LIST;
+
+    if (targetItems.length === 0) {
+      selAllEl.checked = false;
+      return;
+    }
+    selAllEl.checked = targetItems.every(c => SELECTED_NEW_USER_COUNTERS.includes(String(c || "").trim()));
+  }
+
+  function renderModalCounterCheckboxes() {
+    const filterQ = String(document.getElementById("modalCounterFilter").value || "").trim().toLowerCase();
+    const listEl = document.getElementById("modalCounterCheckboxes");
+    const items = filterQ
+      ? COUNTERS_LIST.filter(c => String(c).toLowerCase().includes(filterQ))
+      : COUNTERS_LIST;
+
+    if (!items || items.length === 0) {
+      listEl.innerHTML = '<div style="font-size:12px;color:#64748b;padding:6px;">No counters available</div>';
+      syncSelectAllCheckboxState();
+      return;
+    }
+
+    listEl.innerHTML = items.map(c => {
+      const checked = SELECTED_NEW_USER_COUNTERS.includes(c) ? "checked" : "";
+      return `
+        <label class="counter-check-item">
+          <input type="checkbox" value="${esc(c)}" ${checked} onchange="onModalCounterCheckboxChange(this)" />
+          <span>${esc(c)}</span>
+        </label>
+      `;
+    }).join("");
+
+    syncSelectAllCheckboxState();
+  }
+
+  function onModalCounterCheckboxChange(cb) {
+    const val = String(cb.value || "").trim();
+    if (!val) return;
+    if (cb.checked) {
+      if (!SELECTED_NEW_USER_COUNTERS.includes(val)) SELECTED_NEW_USER_COUNTERS.push(val);
+    } else {
+      SELECTED_NEW_USER_COUNTERS = SELECTED_NEW_USER_COUNTERS.filter(item => item !== val);
+    }
+    syncSelectAllCheckboxState();
+    renderSelectedCountersPreview();
+  }
+
+  function renderSelectedCountersPreview() {
+    const box = document.getElementById("selectedCountersPreview");
+    if (!SELECTED_NEW_USER_COUNTERS.length) {
+      box.innerHTML = '<span style="font-size:11.5px;color:#64748b;">No counter selected yet</span>';
+      return;
+    }
+    box.innerHTML = SELECTED_NEW_USER_COUNTERS.map(c =>
+      `<span class="sel-pill">${esc(c)}</span>`
+    ).join("");
+  }
+
+  async function handleCreateStaffUser(e) {
     e.preventDefault();
     if (!CURRENT_STAFF || !CURRENT_STAFF.canCreateUser) return;
 
-    const newUserId = document.getElementById("newUserId").value.trim();
+    const newUserId = document.getElementById("newUserId").value.trim().toUpperCase();
     const newPassword = document.getElementById("newUserPassword").value.trim();
-    const groupAccess = document.getElementById("newUserGroup").value.trim();
-    const allowUserCreation = document.getElementById("allowUserCreationCheckbox").checked;
+    const empName = toTitleCaseFinal(document.getElementById("newEmpName").value);
+    const mobile = document.getElementById("newMobileNumber").value.replace(/\D/g, "");
+    const roleType = document.getElementById("newUserRoleType").value;
+    const groupAccess = roleType === "Support" ? document.getElementById("newUserGroup").value : "None";
+    const allowUserCreation = roleType === "Support" ? document.getElementById("allowUserCreationCheckbox").checked : false;
+    const counters = SELECTED_NEW_USER_COUNTERS.slice();
 
     const msgEl = document.getElementById("createUserMsg");
+    if (!newUserId || !newPassword || !empName || !mobile || counters.length === 0) {
+      msgEl.className = "msg err";
+      msgEl.textContent = "Please fill all required fields and select at least one counter.";
+      msgEl.style.display = "block";
+      return;
+    }
+
     const btn = document.getElementById("btnCreateUser");
     btn.disabled = true;
-    btn.textContent = "Creating...";
+    btn.textContent = "Saving...";
     msgEl.style.display = "none";
 
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action: "createStaffUser",
-        callerUserId: CURRENT_STAFF.userId,
-        callerPassword: CURRENT_STAFF.password,
-        newUserId: newUserId,
-        newPassword: newPassword,
-        groupAccess: groupAccess,
-        allowUserCreation: allowUserCreation
-      })
-    })
-      .then(r => r.json())
-      .then(res => {
-        msgEl.style.display = "block";
-        if (res && res.status === "success") {
-          msgEl.className = "msg ok";
-          msgEl.innerHTML = `Created User ID <strong>${esc(newUserId)}</strong> (${esc(groupAccess)}). Create User Access: <strong>${allowUserCreation ? "Yes" : "No"}</strong>.`;
-          document.getElementById("createUserForm").reset();
-        } else {
-          msgEl.className = "msg err";
-          msgEl.textContent = (res && res.message) || "Could not create user.";
-        }
-      })
-      .catch(() => {
-        msgEl.style.display = "block";
-        msgEl.className = "msg err";
-        msgEl.textContent = "Network error while creating user.";
-      })
-      .finally(() => {
-        btn.disabled = false;
-        btn.textContent = "Create User ID";
-      });
+    const existingObj = EDITING_USER_INDEX >= 0 ? USERS_LIST[EDITING_USER_INDEX] : null;
+    const userRecord = {
+      userId: newUserId,
+      password: newPassword,
+      employeeName: empName,
+      mobile: mobile,
+      counters: counters,
+      roleType: roleType,
+      groupAccess: groupAccess,
+      canCreateUser: allowUserCreation,
+      isActive: existingObj ? existingObj.isActive : true
+    };
+
+    try {
+      await syncSingleUserToSheet(userRecord);
+
+      if (EDITING_USER_INDEX >= 0) {
+        USERS_LIST[EDITING_USER_INDEX] = userRecord;
+      } else {
+        const existingIdx = USERS_LIST.findIndex(u => u.userId.toUpperCase() === newUserId);
+        if (existingIdx >= 0) USERS_LIST[existingIdx] = userRecord;
+        else USERS_LIST.unshift(userRecord);
+      }
+
+      saveCachedUsers();
+      renderUsersTable();
+      closeCreateUserModal();
+      const counterDisplay = counters.length >= 2 ? "Multi Counters" : counters[0];
+      showUsersScreenMsg(`User <strong>${esc(newUserId)}</strong> (${esc(roleType)}) saved in Google Sheet (${esc(counterDisplay)}).`, false);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Save User";
+    }
+  }
+
+  /* ==================== BULK IMPORT & EXPORT CSV ==================== */
+  function parseCsvLine(line) {
+    const result = [];
+    let current = "";
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        inQuotes = !inQuotes;
+      } else if ((ch === "," || ch === "\t") && !inQuotes) {
+        result.push(current.trim());
+        current = "";
+      } else {
+        current += ch;
+      }
+    }
+    result.push(current.trim());
+    return result;
+  }
+
+  function handleBulkImportFile(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async function(evt) {
+      const text = String(evt.target.result || "");
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (lines.length === 0) {
+        showUsersScreenMsg("Selected file is empty.", true);
+        return;
+      }
+
+      let startIdx = 0;
+      const firstCols = parseCsvLine(lines[0]).map(c => c.toLowerCase());
+      if (firstCols.includes("userid") || firstCols.includes("user id") || firstCols.includes("username")) {
+        startIdx = 1;
+      }
+
+      let importedCount = 0;
+      for (let i = startIdx; i < lines.length; i++) {
+        const cols = parseCsvLine(lines[i]);
+        const uid = String(cols[0] || "").trim().toUpperCase();
+        if (!uid) continue;
+
+        const empName = toTitleCaseFinal(cols[1] || "");
+        const mobile = String(cols[2] || "").replace(/\D/g, "");
+        const counters = normalizeCounterList(cols[3] || "");
+        const roleRaw = String(cols[4] || "User").trim();
+        const roleType = /^support$/i.test(roleRaw) ? "Support" : "User";
+
+        const idx = USERS_LIST.findIndex(u => u.userId.toUpperCase() === uid);
+        const existing = idx >= 0 ? USERS_LIST[idx] : null;
+        const rec = {
+          userId: uid,
+          password: (existing && existing.password) ? existing.password : "1234",
+          employeeName: empName,
+          mobile: mobile,
+          counters: counters,
+          roleType: roleType,
+          groupAccess: roleType === "Support" ? "All" : "None",
+          canCreateUser: existing ? existing.canCreateUser : false,
+          isActive: existing ? existing.isActive : true
+        };
+
+        if (idx >= 0) USERS_LIST[idx] = rec;
+        else USERS_LIST.push(rec);
+        await syncSingleUserToSheet(rec);
+        importedCount++;
+      }
+
+      saveCachedUsers();
+      e.target.value = "";
+      renderUsersTable();
+      showUsersScreenMsg(`Imported <strong>${importedCount}</strong> user(s) and saved to Google Sheet.`, false);
+    };
+    reader.readAsText(file);
+  }
+
+  function exportUsersToCsv() {
+    if (!USERS_LIST.length) {
+      showUsersScreenMsg("No users available to export.", true);
+      return;
+    }
+
+    const headers = ["User ID", "Employee Name", "Phone Number", "Counters", "Role", "Status"];
+    const rows = USERS_LIST.map(u => [
+      u.userId || "",
+      u.employeeName || "",
+      u.mobile || "",
+      normalizeCounterList(u.counters).join(" | "),
+      u.roleType || "User",
+      u.isActive ? "Active" : "Inactive"
+    ]);
+
+    const csvContent = [headers, ...rows]
+      .map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "wheelsmart_users.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   }
 
   loadCounters();
   loadCategories();
+  loadUsersList();
+  restoreSessionIfValid();
 </script>
 </body>
 </html>
